@@ -1,0 +1,3 @@
+rootProject.name = 'Collective'
+
+include ':app'
