@@ -1,10 +1,11 @@
-import { Actions } from 'react-native-router-flux';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged } from '../actions';
+import { emailChanged, passwordChanged, createAccountButtonPressed } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class LoginForm extends Component {
+
+
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
@@ -15,15 +16,7 @@ class LoginForm extends Component {
   }
 
   onCreateAccountButtonPress() {
-    Actions.signinEmailForm();
-  }
-
-  renderCreateAccountButton() {
-    return (
-      <Button onPress={this.onCreateAccountButtonPress.bind(this)}>
-        Create Account
-      </Button>
-    );
+    this.props.createAccountButtonPressed();
   }
 
 
@@ -68,7 +61,9 @@ class LoginForm extends Component {
         </CardSection>
 
         <CardSection>
-          {this.renderCreateAccountButton()}
+          <Button onPress={this.onCreateAccountButtonPress.bind(this)}>
+            Create Account
+          </Button>
         </CardSection>
 
       </Card>
@@ -85,5 +80,5 @@ const mapStateToProps = ({ auth }) => {
 
 
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged
+  emailChanged, passwordChanged, createAccountButtonPressed
 })(LoginForm);

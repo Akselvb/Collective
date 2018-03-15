@@ -21,10 +21,10 @@ export const passwordChanged = (text) => {
   };
 };
 
-export const createAccountButtonPressed = (dispatch) => {
-  dispatch({
-    type: CREATE_ACCOUNT_BUTTON_PRESSED,
-    payload: null
-  });
-  Actions.signinEmailForm();
+
+export const createAccountButtonPressed = () => {
+  return (dispatch) => {
+    dispatch({ type: CREATE_ACCOUNT_BUTTON_PRESSED });
+    Actions.signinEmailForm();
+  };
 };
