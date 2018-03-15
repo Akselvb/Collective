@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signinEmailChanged, signinPasswordChanged } from '../actions';
+import {
+  signinEmailChanged,
+  signinPasswordChanged,
+  signinConfirmPasswordChanged
+} from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class SigninEmailForm extends Component {
@@ -11,6 +15,10 @@ class SigninEmailForm extends Component {
 
   onPasswordChange(text) {
     this.props.signinPasswordChanged(text);
+  }
+
+  onConfirmPasswordChange(text) {
+    this.props.signinConfirmPasswordChanged(text);
   }
 
   renderButton() {
@@ -45,6 +53,16 @@ class SigninEmailForm extends Component {
         </CardSection>
 
         <CardSection>
+          <Input
+            secureTextEntry
+            label="Confirm Password"
+            placeholder="password"
+            onChangeText={this.onConfirmPasswordChange.bind(this)}
+            value={this.props.password}
+          />
+        </CardSection>
+
+        <CardSection>
           {this.renderButton()}
         </CardSection>
 
@@ -54,11 +72,11 @@ class SigninEmailForm extends Component {
 }
 
 const mapStateToProps = ({ auth }) => {
-  const { signinEmail, signinPassword } = auth;
+  const { signinEmail, signinPassword, signinConfirmPassword } = auth;
 
-  return { signinEmail, signinPassword };
+  return { signinEmail, signinPassword, signinConfirmPassword };
 };
 
 export default connect(mapStateToProps, {
-  signinEmailChanged, signinPasswordChanged
+  signinEmailChanged, signinPasswordChanged, signinConfirmPasswordChanged
 })(SigninEmailForm);

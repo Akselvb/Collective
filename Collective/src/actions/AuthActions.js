@@ -4,7 +4,8 @@ import {
   LOGIN_PASSWORD_CHANGED,
   CREATE_ACCOUNT_BUTTON_PRESSED,
   SIGNIN_EMAIL_CHANGED,
-  SIGNIN_PASSWORD_CHANGED
+  SIGNIN_PASSWORD_CHANGED,
+  SIGNIN_CONFIRM_PASSWORD_CHANGED
 } from './types';
 
 
@@ -43,6 +44,14 @@ export const signinEmailChanged = (text) => {
 export const signinPasswordChanged = (text) => {
   return {
     type: SIGNIN_PASSWORD_CHANGED,
+    payload: text
+  };
+};
+
+
+export const signinConfirmPasswordChanged = (text) => {
+  return {
+    type: SIGNIN_CONFIRM_PASSWORD_CHANGED,
     payload: text
   };
 };

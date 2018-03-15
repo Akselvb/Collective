@@ -3,14 +3,16 @@ import {
   LOGIN_PASSWORD_CHANGED,
   CREATE_ACCOUNT_BUTTON_PRESSED,
   SIGNIN_EMAIL_CHANGED,
-  SIGNIN_PASSWORD_CHANGED
+  SIGNIN_PASSWORD_CHANGED,
+  SIGNIN_CONFIRM_PASSWORD_CHANGED
 } from '../actions/types';
 
 const INITIAL_STATE = {
   loginEmail: '',
   loginPassword: '',
   signinEmail: '',
-  signinPassword: ''
+  signinPassword: '',
+  signinConfirmPassword: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -25,6 +27,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, signinEmail: action.payload };
     case SIGNIN_PASSWORD_CHANGED:
       return { ...state, signinPassword: action.payload };
+    case SIGNIN_CONFIRM_PASSWORD_CHANGED:
+      return { ...state, signinConfirmPassword: action.payload };
     default:
       return state;
   }

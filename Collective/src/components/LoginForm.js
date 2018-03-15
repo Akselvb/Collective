@@ -46,6 +46,8 @@ class LoginForm extends Component {
           </Button>
         </CardSection>
 
+        <CardSection />
+
         <CardSection>
           <Button>
             Facebook
