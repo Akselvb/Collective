@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged } from '../actions';
+import { signinEmailChanged, signinPasswordChanged } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class SigninEmailForm extends Component {
-  onEmailChange(text) {
-    this.props.emailChanged(text);
-  }
 
+  onEmailChange(text) {
+    this.props.signinEmailChanged(text);
+  }
 
   onPasswordChange(text) {
-    this.props.passwordChanged(text);
+    this.props.signinPasswordChanged(text);
   }
-
 
   renderButton() {
     return (
@@ -22,10 +21,10 @@ class SigninEmailForm extends Component {
     );
   }
 
-
   render() {
     return (
       <Card>
+
         <CardSection>
           <Input
             label="Email"
@@ -48,19 +47,18 @@ class SigninEmailForm extends Component {
         <CardSection>
           {this.renderButton()}
         </CardSection>
+
       </Card>
     );
   }
 }
 
-
 const mapStateToProps = ({ auth }) => {
-  const { email, password } = auth;
+  const { signinEmail, signinPassword } = auth;
 
-  return { email, password };
+  return { signinEmail, signinPassword };
 };
 
-
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged
+  signinEmailChanged, signinPasswordChanged
 })(SigninEmailForm);

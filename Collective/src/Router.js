@@ -12,7 +12,6 @@ const RouterComponent = () => {
         <Scene key="signinEmailForm" component={SigninEmailForm} title="Please Sign In" />
       </Scene>
 
-
     </Router>
   );
 };
