@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { emailChanged, passwordChanged } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
-class LoginForm extends Component {
+class SigninEmailForm extends Component {
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
@@ -11,6 +11,15 @@ class LoginForm extends Component {
 
   onPasswordChange(text) {
     this.props.passwordChanged(text);
+  }
+
+
+  renderButton() {
+    return (
+      <Button>
+        Sign In
+      </Button>
+    );
   }
 
 
@@ -37,29 +46,8 @@ class LoginForm extends Component {
         </CardSection>
 
         <CardSection>
-          <Button>
-            Login
-          </Button>
+          {this.renderButton()}
         </CardSection>
-
-        <CardSection>
-          <Button>
-            Facebook
-          </Button>
-        </CardSection>
-
-        <CardSection>
-          <Button>
-            Google
-          </Button>
-        </CardSection>
-
-        <CardSection>
-          <Button>
-            Create Account
-          </Button>
-        </CardSection>
-
       </Card>
     );
   }
@@ -75,4 +63,4 @@ const mapStateToProps = ({ auth }) => {
 
 export default connect(mapStateToProps, {
   emailChanged, passwordChanged
-})(LoginForm);
+})(SigninEmailForm);
