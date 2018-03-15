@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import {
   signinEmailChanged,
   signinPasswordChanged,
-  signinConfirmPasswordChanged
+  signinConfirmPasswordChanged,
+  signinUser
 } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
@@ -21,9 +22,15 @@ class SigninEmailForm extends Component {
     this.props.signinConfirmPasswordChanged(text);
   }
 
+  onButtonPress() {
+    const { signinEmail, signinPassword, signinConfirmPassword } = this.props;
+
+    this.props.signinUser({ signinEmail, signinPassword, signinConfirmPassword });
+  }
+
   renderButton() {
     return (
-      <Button>
+      <Button onPress={this.onButtonPress.bind(this)}>
         Sign In
       </Button>
     );
@@ -78,5 +85,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
-  signinEmailChanged, signinPasswordChanged, signinConfirmPasswordChanged
+  signinEmailChanged, signinPasswordChanged, signinConfirmPasswordChanged, signinUser
 })(SigninEmailForm);

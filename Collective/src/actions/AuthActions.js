@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import {
   LOGIN_EMAIL_CHANGED,
@@ -5,7 +6,8 @@ import {
   CREATE_ACCOUNT_BUTTON_PRESSED,
   SIGNIN_EMAIL_CHANGED,
   SIGNIN_PASSWORD_CHANGED,
-  SIGNIN_CONFIRM_PASSWORD_CHANGED
+  SIGNIN_CONFIRM_PASSWORD_CHANGED,
+  SIGNIN_USER
 } from './types';
 
 
@@ -53,5 +55,29 @@ export const signinConfirmPasswordChanged = (text) => {
   return {
     type: SIGNIN_CONFIRM_PASSWORD_CHANGED,
     payload: text
+  };
+};
+
+
+export const signinUser = ({ signinEmail, signinPassword, signinConfirmPassword }) => {
+  return (dispatch) => {
+    dispatch({ type: SIGNIN_USER });
+
+    if (signinPassword !== signinConfirmPassword) {
+      console.log('Passwords does not match');
+    } else {
+      firebase.auth().createUserWithEmailAndPassword(signinEmail, signinPassword)
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if (errorCode === 'auth/weak-password') {
+            console.log('The password is too weak.');
+          } else {
+            console.log(errorMessage);
+          }
+          console.log(error);
+        });
+    }
   };
 };

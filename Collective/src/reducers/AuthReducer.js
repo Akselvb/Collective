@@ -4,7 +4,8 @@ import {
   CREATE_ACCOUNT_BUTTON_PRESSED,
   SIGNIN_EMAIL_CHANGED,
   SIGNIN_PASSWORD_CHANGED,
-  SIGNIN_CONFIRM_PASSWORD_CHANGED
+  SIGNIN_CONFIRM_PASSWORD_CHANGED,
+  SIGNIN_USER
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -29,6 +30,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, signinPassword: action.payload };
     case SIGNIN_CONFIRM_PASSWORD_CHANGED:
       return { ...state, signinConfirmPassword: action.payload };
+    case SIGNIN_USER:
+      return { ...state, ...INITIAL_STATE, user: action.payload };
     default:
       return state;
   }
