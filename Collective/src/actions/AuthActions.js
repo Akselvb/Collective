@@ -3,6 +3,9 @@ import { Actions } from 'react-native-router-flux';
 import {
   LOGIN_EMAIL_CHANGED,
   LOGIN_PASSWORD_CHANGED,
+  LOGIN_USER,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAIL,
   CREATE_ACCOUNT_BUTTON_PRESSED,
   SIGNIN_EMAIL_CHANGED,
   SIGNIN_PASSWORD_CHANGED,
@@ -13,6 +16,9 @@ import {
 } from './types';
 
 
+/*
+  LOGIN EMAIL ACCOUNT.
+*/
 export const loginEmailChanged = (text) => {
   return {
     type: LOGIN_EMAIL_CHANGED,
@@ -36,7 +42,34 @@ export const createAccountButtonPressed = () => {
   };
 };
 
+export const loginUser = ({ loginEmail, loginPassword }) => {
+  return (dispatch) => {
+    dispatch({ type: LOGIN_USER });
 
+    firebase.auth().signInWithEmailAndPassword(loginEmail, loginPassword)
+      .then(user => loginUserSuccess(dispatch, user))
+      .catch((error) => loginUserFail(dispatch, error.message));
+  };
+};
+
+const loginUserSuccess = (dispatch, user) => {
+  dispatch({
+    type: LOGIN_USER_SUCCESS,
+    payload: user
+  });
+};
+
+const loginUserFail = (dispatch, errorMessage) => {
+  dispatch({
+    type: LOGIN_USER_FAIL,
+    payload: errorMessage
+   });
+};
+
+
+/*
+  CREATE AN ACCOUNT.
+*/
 export const signinEmailChanged = (text) => {
   return {
     type: SIGNIN_EMAIL_CHANGED,
