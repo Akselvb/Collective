@@ -16,7 +16,8 @@ const INITIAL_STATE = {
   signinEmail: '',
   signinPassword: '',
   signinConfirmPassword: '',
-  error: ''
+  error: '',
+  loading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -34,11 +35,11 @@ export default (state = INITIAL_STATE, action) => {
     case SIGNIN_CONFIRM_PASSWORD_CHANGED:
       return { ...state, signinConfirmPassword: action.payload };
     case SIGNIN_USER:
-      return { ...state };
+      return { ...state, loading: true };
     case SIGNIN_USER_FAIL:
-      return { ...state, error: action.payload };
+      return { ...state, error: action.payload, loading: false };
     case SIGNIN_USER_SUCCESS:
-      return { ...state, error: '' };
+      return { ...state, error: '', loading: false };
     default:
       return state;
   }

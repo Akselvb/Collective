@@ -5,7 +5,7 @@ import SigninEmailForm from './components/SigninEmailForm';
 
 const RouterComponent = () => {
   return (
-    <Router sceneStyle={{ paddingTop: 65 }}>
+    <Router sceneStyle={{ paddingTop: 1 }}>
 
       <Scene key="auth">
         <Scene key="login" component={LoginForm} title="Please Login" initial />

@@ -46,23 +46,23 @@ class LoginForm extends Component {
           </Button>
         </CardSection>
 
-        <CardSection />
+        <CardSection style={{ paddingTop: 270 }} />
 
         <CardSection>
           <Button>
-            Facebook
+            Sign in with Facebook
           </Button>
         </CardSection>
 
         <CardSection>
           <Button>
-            Google
+            Sign in with Google
           </Button>
         </CardSection>
 
         <CardSection>
           <Button onPress={this.onCreateAccountButtonPress.bind(this)}>
-            Create Account
+            Create an Account
           </Button>
         </CardSection>
 
