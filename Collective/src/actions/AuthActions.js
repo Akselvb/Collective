@@ -80,7 +80,7 @@ export const signinUser = ({ signinEmail, signinPassword, signinConfirmPassword 
 
 const signinUserSuccess = (dispatch) => {
   dispatch({
-    type: SIGNIN_USER_SUCCESS,
+    type: SIGNIN_USER_SUCCESS
   });
 };
 
