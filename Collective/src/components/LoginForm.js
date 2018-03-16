@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import { Text } from 'react-native';
 import { connect } from 'react-redux';
-import { loginEmailChanged, loginPasswordChanged, createAccountButtonPressed } from '../actions';
-import { Card, CardSection, Input, Button } from './common';
+import {
+  loginEmailChanged,
+  loginPasswordChanged,
+  createAccountButtonPressed,
+  loginUser }
+from '../actions';
+import { Card, CardSection, Input, Button, Spinner } from './common';
 
 class LoginForm extends Component {
 
@@ -15,6 +21,24 @@ class LoginForm extends Component {
 
   onCreateAccountButtonPress() {
     this.props.createAccountButtonPressed();
+  }
+
+  onLoginButtonPress() {
+    const { loginEmail, loginPassword } = this.props;
+
+    this.props.loginUser({ loginEmail, loginPassword });
+  }
+
+  renderButton() {
+    if (this.props.loading) {
+      return <Spinner size="large" />;
+    }
+
+    return (
+      <Button onPress={this.onLoginButtonPress.bind(this)}>
+        Login
+      </Button>
+    );
   }
 
   render() {
@@ -40,13 +64,15 @@ class LoginForm extends Component {
           />
         </CardSection>
 
+        <Text style={styles.errorTextStyle}>
+          {this.props.error}
+        </Text>
+
         <CardSection>
-          <Button>
-            Login
-          </Button>
+          {this.renderButton()}
         </CardSection>
 
-        <CardSection style={{ paddingTop: 270 }} />
+        <CardSection style={{ paddingTop: 240 }} />
 
         <CardSection>
           <Button>
@@ -71,12 +97,20 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-  const { loginEmail, loginPassword } = auth;
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red'
+  }
+};
 
-  return { loginEmail, loginPassword };
+const mapStateToProps = ({ auth }) => {
+  const { loginEmail, loginPassword, error, loading } = auth;
+
+  return { loginEmail, loginPassword, error, loading };
 };
 
 export default connect(mapStateToProps, {
-  loginEmailChanged, loginPasswordChanged, createAccountButtonPressed
+  loginEmailChanged, loginPasswordChanged, createAccountButtonPressed, loginUser
 })(LoginForm);
