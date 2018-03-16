@@ -5,7 +5,8 @@ import {
   SIGNIN_EMAIL_CHANGED,
   SIGNIN_PASSWORD_CHANGED,
   SIGNIN_CONFIRM_PASSWORD_CHANGED,
-  SIGNIN_USER
+  SIGNIN_USER,
+  SIGNIN_USER_FAIL
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -13,7 +14,8 @@ const INITIAL_STATE = {
   loginPassword: '',
   signinEmail: '',
   signinPassword: '',
-  signinConfirmPassword: ''
+  signinConfirmPassword: '',
+  error: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,6 +34,9 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, signinConfirmPassword: action.payload };
     case SIGNIN_USER:
       return { ...state, ...INITIAL_STATE, user: action.payload };
+    case SIGNIN_USER_FAIL:
+      console.log('DETTE ER I AUTH REDUCER');
+      return { ...state, error: 'Signin failed', signinPassword: '', signinConfirmPassword: '' };
     default:
       return state;
   }

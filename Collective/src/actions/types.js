@@ -6,3 +6,4 @@ export const SIGNIN_EMAIL_CHANGED = 'signin_email_changed';
 export const SIGNIN_PASSWORD_CHANGED = 'signin_password_changed';
 export const SIGNIN_CONFIRM_PASSWORD_CHANGED = 'signin_confirm_password_changed';
 export const SIGNIN_USER = 'signin_user';
+export const SIGNIN_USER_FAIL = 'signin_user_fail';

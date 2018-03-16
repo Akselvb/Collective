@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import {
   signinEmailChanged,
@@ -69,6 +70,10 @@ class SigninEmailForm extends Component {
           />
         </CardSection>
 
+        <Text style={styles.errorTextStyle}>
+          {this.props.error}
+        </Text>
+
         <CardSection>
           {this.renderButton()}
         </CardSection>
@@ -78,10 +83,18 @@ class SigninEmailForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-  const { signinEmail, signinPassword, signinConfirmPassword } = auth;
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red'
+  }
+};
 
-  return { signinEmail, signinPassword, signinConfirmPassword };
+const mapStateToProps = ({ auth }) => {
+  const { signinEmail, signinPassword, signinConfirmPassword, error } = auth;
+
+  return { signinEmail, signinPassword, signinConfirmPassword, error };
 };
 
 export default connect(mapStateToProps, {

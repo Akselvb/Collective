@@ -7,7 +7,8 @@ import {
   SIGNIN_EMAIL_CHANGED,
   SIGNIN_PASSWORD_CHANGED,
   SIGNIN_CONFIRM_PASSWORD_CHANGED,
-  SIGNIN_USER
+  SIGNIN_USER,
+  SIGNIN_USER_FAIL
 } from './types';
 
 
@@ -68,16 +69,14 @@ export const signinUser = ({ signinEmail, signinPassword, signinConfirmPassword 
     } else {
       firebase.auth().createUserWithEmailAndPassword(signinEmail, signinPassword)
         .catch((error) => {
-          // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          if (errorCode === 'auth/weak-password') {
-            console.log('The password is too weak.');
-          } else {
-            console.log(errorMessage);
-          }
           console.log(error);
+          signinUserFail(dispatch);
         });
     }
   };
+};
+
+const signinUserFail = (dispatch) => {
+  console.log('HEI');
+  dispatch({ type: SIGNIN_USER_FAIL });
 };
