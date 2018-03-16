@@ -7,7 +7,7 @@ import {
   signinConfirmPasswordChanged,
   signinUser
 } from '../actions';
-import { Card, CardSection, Input, Button } from './common';
+import { Card, CardSection, Input, Button, Spinner } from './common';
 
 class SigninEmailForm extends Component {
 
@@ -30,9 +30,14 @@ class SigninEmailForm extends Component {
   }
 
   renderButton() {
+    console.log(this.props.loading);
+    if (this.props.loading) {
+      return <Spinner size="large" />;
+    }
+
     return (
       <Button onPress={this.onButtonPress.bind(this)}>
-        Sign In
+        Create an Account
       </Button>
     );
   }
@@ -92,9 +97,9 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  const { signinEmail, signinPassword, signinConfirmPassword, error } = auth;
+  const { signinEmail, signinPassword, signinConfirmPassword, error, loading } = auth;
 
-  return { signinEmail, signinPassword, signinConfirmPassword, error };
+  return { signinEmail, signinPassword, signinConfirmPassword, error, loading };
 };
 
 export default connect(mapStateToProps, {
