@@ -65,18 +65,20 @@ export const signinUser = ({ signinEmail, signinPassword, signinConfirmPassword 
     dispatch({ type: SIGNIN_USER });
 
     if (signinPassword !== signinConfirmPassword) {
-      console.log('Passwords does not match');
+      const errorMessage = 'Passwords does not match';
+      signinUserFail(dispatch, errorMessage);
     } else {
       firebase.auth().createUserWithEmailAndPassword(signinEmail, signinPassword)
         .catch((error) => {
-          console.log(error);
-          signinUserFail(dispatch);
+          signinUserFail(dispatch, error.message);
         });
     }
   };
 };
 
-const signinUserFail = (dispatch) => {
-  console.log('HEI');
-  dispatch({ type: SIGNIN_USER_FAIL });
+const signinUserFail = (dispatch, errorMessage) => {
+  dispatch({
+    type: SIGNIN_USER_FAIL,
+    payload: errorMessage
+   });
 };

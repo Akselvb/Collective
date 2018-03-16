@@ -36,7 +36,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, ...INITIAL_STATE, user: action.payload };
     case SIGNIN_USER_FAIL:
       console.log('DETTE ER I AUTH REDUCER');
-      return { ...state, error: 'Signin failed', signinPassword: '', signinConfirmPassword: '' };
+      return { ...state, error: action.payload, signinPassword: '', signinConfirmPassword: '' };
     default:
       return state;
   }
