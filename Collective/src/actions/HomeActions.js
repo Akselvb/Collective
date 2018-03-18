@@ -5,7 +5,6 @@ import {
 
 export const userFetch = () => {
   const { currentUser } = firebase.auth();
-  //console.log(currentUser.email);
 
   return {
     type: GET_USER,
