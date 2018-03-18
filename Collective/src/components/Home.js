@@ -14,8 +14,7 @@ class Home extends Component {
     return (
       <Card>
         <CardSection>
-            <Text>{this.props.user}</Text>
-            console.log(this.props.user);
+            <Text>Welcome, {this.props.user}!</Text>
         </CardSection>
       </Card>
     );

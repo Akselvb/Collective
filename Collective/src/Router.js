@@ -17,7 +17,7 @@ const RouterComponent = () => {
         <Scene key="main">
           <Scene key="home" component={Home} title="Home" />
         </Scene>
-        
+
       </Scene>
     </Router>
   );
