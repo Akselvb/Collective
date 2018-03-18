@@ -72,7 +72,7 @@ class LoginForm extends Component {
           {this.renderButton()}
         </CardSection>
 
-        <CardSection style={{ paddingTop: 240 }} />
+        <CardSection style={{ paddingTop: 180 }} />
 
         <CardSection>
           <Button>

@@ -10,8 +10,7 @@ import {
   SIGNIN_PASSWORD_CHANGED,
   SIGNIN_CONFIRM_PASSWORD_CHANGED,
   SIGNIN_USER,
-  SIGNIN_USER_FAIL,
-  SIGNIN_USER_SUCCESS
+  SIGNIN_USER_FAIL
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -52,8 +51,6 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, loading: true };
     case SIGNIN_USER_FAIL:
       return { ...state, error: action.payload, loading: false };
-    case SIGNIN_USER_SUCCESS:
-      return { ...state, error: '', loading: false };
     default:
       return state;
   }

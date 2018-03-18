@@ -11,8 +11,7 @@ import {
   SIGNIN_PASSWORD_CHANGED,
   SIGNIN_CONFIRM_PASSWORD_CHANGED,
   SIGNIN_USER,
-  SIGNIN_USER_FAIL,
-  SIGNIN_USER_SUCCESS
+  SIGNIN_USER_FAIL
 } from './types';
 
 
@@ -57,6 +56,7 @@ const loginUserSuccess = (dispatch, user) => {
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
+  Actions.main();
 };
 
 const loginUserFail = (dispatch, errorMessage) => {
@@ -103,18 +103,12 @@ export const signinUser = ({ signinEmail, signinPassword, signinConfirmPassword 
       signinUserFail(dispatch, errorMessage);
     } else {
       firebase.auth().createUserWithEmailAndPassword(signinEmail, signinPassword)
-        .then(() => signinUserSuccess(dispatch))
+        .then(user => loginUserSuccess(dispatch, user))
         .catch((error) => {
           signinUserFail(dispatch, error.message);
         });
     }
   };
-};
-
-const signinUserSuccess = (dispatch) => {
-  dispatch({
-    type: SIGNIN_USER_SUCCESS
-  });
 };
 
 
