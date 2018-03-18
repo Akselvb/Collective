@@ -8,7 +8,7 @@ import Home from './components/Home';
 const RouterComponent = () => {
   return (
     <Router sceneStyle={{ paddingTop: 1 }}>
-      <Scene>
+      <Scene hideNavBar>
 
         <Scene key="auth">
           <Scene key="login" component={LoginForm} title="Sign in / create account" initial />
