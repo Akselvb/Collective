@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import SigninEmailForm from './components/SigninEmailForm';
@@ -14,8 +15,13 @@ const RouterComponent = () => {
           <Scene key="signinEmailForm" component={SigninEmailForm} title="Create account" />
         </Scene>
 
-        <Scene key="main">
-          <Scene key="home" component={Home} title="Home" />
+        <Scene key="main" renderBackButton={() => (<View />)}>
+          <Scene
+
+            key="home"
+            component={Home}
+            title="Home"
+          />
         </Scene>
 
       </Scene>
