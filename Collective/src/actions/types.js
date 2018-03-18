@@ -11,3 +11,5 @@ export const SIGNIN_CONFIRM_PASSWORD_CHANGED = 'signin_confirm_password_changed'
 export const SIGNIN_USER = 'signin_user';
 export const SIGNIN_USER_FAIL = 'signin_user_fail';
 export const SIGNIN_USER_SUCCESS = 'signin_user_success';
+
+export const GET_USER = 'get_user';
