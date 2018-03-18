@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import {
   signinEmailChanged,
@@ -75,13 +75,18 @@ class SigninEmailForm extends Component {
           />
         </CardSection>
 
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
-
         <CardSection>
           {this.renderButton()}
         </CardSection>
+
+        <View style={{ backgroundColor: '#fff' }}>
+          <Text style={styles.errorTextStyle}>
+            {this.props.error}
+          </Text>
+        </View>
+
+        <CardSection style={{ paddingTop: 350 }} />
+
 
       </Card>
     );
