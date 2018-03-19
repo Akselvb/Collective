@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Actions } from 'react-native-router-flux';
-import { loginUser } from '../actions';
+import { connect } from 'react-redux';
+import { signupUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 
-class LoginForm extends Component {
-  onCreateAccountPress() {
-    Actions.signup();
+class SignupForm extends Component {
+  onPress({ email, password, confirmPassword }) {
+    this.props.signupUser({ email, password, confirmPassword });
   }
 
-  onLoginPress({ email, password }) {
-    this.props.loginUser({ email, password });
-  }
-
-  renderLoginButton() {
+  renderButton() {
     const { handleSubmit } = this.props;
 
     if (this.props.loading) {
       return <Spinner size="large" />;
     }
 
-    return <Button onPress={handleSubmit(this.onLoginPress.bind(this))}>Login</Button>;
+    return <Button onPress={handleSubmit(this.onPress.bind(this))}>Create an Account</Button>;
   }
 
   render() {
@@ -42,25 +37,23 @@ class LoginForm extends Component {
           />
         </CardSection>
 
-        <CardSection>{this.renderLoginButton()}</CardSection>
+        <CardSection>
+          <Field
+            name="confirmPassword"
+            secureTextEntry
+            label="Confirm Password"
+            placeholder="password"
+            component={Input}
+          />
+        </CardSection>
+
+        <CardSection>{this.renderButton()}</CardSection>
 
         <View style={{ backgroundColor: '#fff' }}>
           <Text style={styles.errorText}>{this.props.error}</Text>
         </View>
 
-        <CardSection style={{ paddingTop: 180 }} />
-
-        <CardSection>
-          <Button>Sign in with Facebook</Button>
-        </CardSection>
-
-        <CardSection>
-          <Button>Sign in with Google</Button>
-        </CardSection>
-
-        <CardSection>
-          <Button onPress={this.onCreateAccountPress}>Create an Account</Button>
-        </CardSection>
+        <CardSection style={{ paddingTop: 350 }} />
       </Card>
     );
   }
@@ -74,7 +67,9 @@ const styles = {
   }
 };
 
-const validate = ({ email, password }) => {
+const mapStateToProps = ({ auth: { error, loading } }) => ({ error, loading });
+
+const validate = ({ email, password, confirmPassword }) => {
   const errors = {};
 
   if (!email || email.trim() === '') {
@@ -84,13 +79,17 @@ const validate = ({ email, password }) => {
     errors.password = 'Please enter a password';
   }
 
+  if (!confirmPassword || password.trim() === '') {
+    errors.confirmPassword = 'Please confirm password';
+  } else if (password !== confirmPassword) {
+    errors.confirmPassword = 'Passwords must match';
+  }
+
   return errors;
 };
 
-const mapStateToProps = ({ auth: { error, loading } }) => ({ error, loading });
-
-export default reduxForm({ form: 'login', validate })(
+export default reduxForm({ form: 'signup', validate })(
   connect(mapStateToProps, {
-    loginUser
-  })(LoginForm)
+    signupUser
+  })(SignupForm)
 );
