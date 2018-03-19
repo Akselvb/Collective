@@ -39,21 +39,16 @@ const loginUserFail = (dispatch, errorMessage) => {
 /*
   CREATE AN ACCOUNT.
 */
-export const signupUser = ({ email, password, confirmPassword }) => dispatch => {
+export const signupUser = ({ email, password }) => dispatch => {
   dispatch({ type: SIGNUP_USER });
-  console.log({ email, password, confirmPassword });
-  if (password !== confirmPassword) {
-    const errorMessage = 'Passwords does not match';
-    signupUserFail(dispatch, errorMessage);
-  } else {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(user => loginUserSuccess(dispatch, user))
-      .catch(error => {
-        signupUserFail(dispatch, error.message);
-      });
-  }
+
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(user => loginUserSuccess(dispatch, user))
+    .catch(error => {
+      signupUserFail(dispatch, error.message);
+    });
 };
 
 const signupUserFail = (dispatch, errorMessage) => {

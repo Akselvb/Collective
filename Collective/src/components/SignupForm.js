@@ -6,8 +6,8 @@ import { signupUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 
 class SignupForm extends Component {
-  onPress({ email, password, confirmPassword }) {
-    this.props.signupUser({ email, password, confirmPassword });
+  onPress({ email, password }) {
+    this.props.signupUser({ email, password });
   }
 
   renderButton() {
