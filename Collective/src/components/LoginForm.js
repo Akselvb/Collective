@@ -1,119 +1,97 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import {
-  loginEmailChanged,
-  loginPasswordChanged,
-  createAccountButtonPressed,
-  loginUser }
-from '../actions';
-import { Card, CardSection, Input, Button, Spinner } from './common';
+import { Field, reduxForm } from 'redux-form';
+import { Actions } from 'react-native-router-flux';
+import { loginUser } from '../actions';
+import { Card, CardSection, Input, Button, Spinner, AuthError } from './common';
 
 class LoginForm extends Component {
-
-  onEmailChange(text) {
-    this.props.loginEmailChanged(text);
+  onCreateAccountPress() {
+    Actions.signup();
   }
 
-  onPasswordChange(text) {
-    this.props.loginPasswordChanged(text);
+  onLoginPress({ email, password }) {
+    this.props.loginUser({ email, password });
   }
 
-  onCreateAccountButtonPress() {
-    this.props.createAccountButtonPressed();
+  renderErrorText() {
+    const error = this.props.error;
+
+    if (error) {
+      return (
+        <AuthError>{error}</AuthError>
+      );
+    }
   }
 
-  onLoginButtonPress() {
-    const { loginEmail, loginPassword } = this.props;
+  renderLoginButton() {
+    const { handleSubmit } = this.props;
 
-    this.props.loginUser({ loginEmail, loginPassword });
-  }
-
-  renderButton() {
     if (this.props.loading) {
       return <Spinner size="large" />;
     }
 
-    return (
-      <Button onPress={this.onLoginButtonPress.bind(this)}>
-        Login
-      </Button>
-    );
+    return <Button onPress={handleSubmit(this.onLoginPress.bind(this))}>Login</Button>;
   }
 
   render() {
     return (
       <Card>
-
         <CardSection>
-          <Input
-            label="Email"
-            placeholder="email@gmail.com"
-            onChangeText={this.onEmailChange.bind(this)}
-            value={this.props.email}
-          />
+          <Field name="email" label="Email" placeholder="email@gmail.com" component={Input} />
         </CardSection>
 
         <CardSection>
-          <Input
+          <Field
+            name="password"
             secureTextEntry
             label="Password"
             placeholder="password"
-            onChangeText={this.onPasswordChange.bind(this)}
-            value={this.props.password}
+            component={Input}
           />
         </CardSection>
 
+        <CardSection>{this.renderLoginButton()}</CardSection>
 
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
 
-        <View style={{ backgroundColor: '#fff' }}>
-          <Text style={styles.errorTextStyle}>
-            {this.props.error}
-          </Text>
-        </View>
+        <CardSection>{this.renderErrorText()}</CardSection>
+
 
         <CardSection style={{ paddingTop: 180 }} />
 
         <CardSection>
-          <Button>
-            Sign in with Facebook
-          </Button>
+          <Button>Sign in with Facebook</Button>
         </CardSection>
 
         <CardSection>
-          <Button>
-            Sign in with Google
-          </Button>
+          <Button>Sign in with Google</Button>
         </CardSection>
 
         <CardSection>
-          <Button onPress={this.onCreateAccountButtonPress.bind(this)}>
-            Create an Account
-          </Button>
+          <Button onPress={this.onCreateAccountPress}>Create an Account</Button>
         </CardSection>
-
       </Card>
     );
   }
 }
 
-const styles = {
-  errorTextStyle: {
-    fontSize: 20,
-    alignSelf: 'center',
-    color: 'red'
+const validate = ({ email, password }) => {
+  const errors = {};
+
+  if (!email || email.trim() === '') {
+    errors.email = 'Please enter an email';
   }
+  if (!password || password.trim() === '') {
+    errors.password = 'Please enter a password';
+  }
+
+  return errors;
 };
 
-const mapStateToProps = ({ auth }) => {
-  const { loginEmail, loginPassword, error, loading } = auth;
+const mapStateToProps = ({ auth: { error, loading } }) => ({ error, loading });
 
-  return { loginEmail, loginPassword, error, loading };
-};
-
-export default connect(mapStateToProps, {
-  loginEmailChanged, loginPasswordChanged, createAccountButtonPressed, loginUser
-})(LoginForm);
+export default reduxForm({ form: 'login', validate })(
+  connect(mapStateToProps, {
+    loginUser
+  })(LoginForm)
+);

@@ -1,30 +1,20 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
-import { userFetch } from '../actions';
 import { Card, CardSection } from './common';
 
 class Home extends Component {
-  componentWillMount() {
-  this.props.userFetch();
-}
-
-
   render() {
     return (
       <Card>
         <CardSection>
-            <Text>Welcome, {this.props.user}!</Text>
+          <Text>Welcome, {this.props.email}!</Text>
         </CardSection>
       </Card>
     );
   }
 }
 
-const mapStateToProps = ({ home }) => {
-  const { user } = home;
+const mapStateToProps = ({ auth }) => ({ email: auth.user.email });
 
-  return { user };
-};
-
-export default connect(mapStateToProps, { userFetch })(Home);
+export default connect(mapStateToProps)(Home);
