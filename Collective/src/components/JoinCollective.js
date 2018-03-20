@@ -10,7 +10,7 @@ class JoinCollective extends Component {
   onJoinCollectivePress({ user, collectiveId }) {
     console.log({ user });
     console.log('Hvordan hente user objekt?');
-    this.props.joinCollective({ collectiveId });
+    this.props.joinCollective({ user, collectiveId });
   }
 
   renderErrorText() {
