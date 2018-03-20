@@ -4,7 +4,10 @@ import { Scene, Router } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import Home from './components/Home';
-import CreateJoinCollective from './components/CreateJoinCollective';
+import CollectiveManager from './components/CollectiveManager';
+import JoinCollective from './components/JoinCollective';
+import CreateCollective from './components/CreateCollective';
+
 
 const RouterComponent = () => (
   <Router sceneStyle={{ paddingTop: 1 }}>
@@ -14,8 +17,13 @@ const RouterComponent = () => (
         <Scene key="signup" component={SignupForm} title="Create account" />
       </Scene>
 
+      <Scene key="manager">
+        <Scene key="collectiveManager" component={CollectiveManager} title="Not in collective" renderBackButton={() => <View />} />
+        <Scene key="joinCollective" component={JoinCollective} title="Join Collective" />
+        <Scene key="createCollective" component={CreateCollective} title="Create new Collective" />
+      </Scene>
+
       <Scene key="main" renderBackButton={() => <View />}>
-        <Scene key="createJoinCollective" component={CreateJoinCollective} title="Not in collective" />
         <Scene key="home" component={Home} title="Home" />
       </Scene>
     </Scene>
