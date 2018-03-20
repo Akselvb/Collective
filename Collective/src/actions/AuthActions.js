@@ -22,11 +22,11 @@ export const loginUser = ({ email, password }) => dispatch => {
 };
 
 const loginUserSuccess = (dispatch, user) => {
+  isUserInCollective({ user });
   dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
-  Actions.main();
 };
 
 const loginUserFail = (dispatch, errorMessage) => {
@@ -55,5 +55,20 @@ const signupUserFail = (dispatch, errorMessage) => {
   dispatch({
     type: SIGNUP_USER_FAIL,
     payload: errorMessage
+  });
+};
+
+
+/*
+  LOGIN SEMANTICS.
+*/
+const isUserInCollective = ({ user }) => {
+  const ref = firebase.database().ref('usersInCollective');
+  ref.child(user.uid).once('value', snapshot => {
+     if (snapshot.val() !== null) {
+       Actions.home();
+     } else {
+       Actions.collectiveManager();
+     }
   });
 };

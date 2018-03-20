@@ -4,11 +4,16 @@ import { connect } from 'react-redux';
 import { Card, CardSection } from './common';
 
 class Home extends Component {
+
   render() {
     return (
       <Card>
         <CardSection>
           <Text>Welcome, {this.props.email}!</Text>
+        </CardSection>
+
+        <CardSection>
+          <Text>You are part of a Collective!</Text>
         </CardSection>
       </Card>
     );
