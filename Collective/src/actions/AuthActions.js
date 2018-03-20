@@ -26,6 +26,8 @@ const loginUserSuccess = (dispatch, user) => {
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
+
+  isUserInCollective({ user });
   Actions.main();
 };
 
@@ -55,5 +57,37 @@ const signupUserFail = (dispatch, errorMessage) => {
   dispatch({
     type: SIGNUP_USER_FAIL,
     payload: errorMessage
+  });
+};
+
+
+/*
+  LOGIN SEMANTICS.
+*/
+
+
+/*
+const isUserInCollective = ({ user }) => {
+  const collectiveId = '123-123';
+
+  // Push user to correct collective.
+  firebase.database().ref(`collectiveId/${collectiveId}/users/`)
+    .push(user.uid);
+
+  // Push user to list of users in collective.
+  firebase.database().ref(`usersInCollective/${user.uid}`)
+    .push(user.uid);
+};
+*/
+
+
+const isUserInCollective = ({ user }) => {
+  const ref = firebase.database().ref('usersInCollective');
+  ref.child(user.uid).once('value', snapshot => {
+     if (snapshot.val() !== null) {
+       console.log('Vi går direkte til kollektivet');
+     } else {
+       console.log('Vi får til opprett eller join kollektiv');
+     }
   });
 };
