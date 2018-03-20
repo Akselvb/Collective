@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { signupUser } from '../actions';
-import { Card, CardSection, Input, Button, Spinner } from './common';
+import { Card, CardSection, Input, Button, Spinner, AuthError } from './common';
 
 class SignupForm extends Component {
   onPress({ email, password }) {
@@ -18,6 +17,16 @@ class SignupForm extends Component {
     }
 
     return <Button onPress={handleSubmit(this.onPress.bind(this))}>Create an Account</Button>;
+  }
+
+  renderErrorText() {
+    const error = this.props.error;
+
+    if (error) {
+      return (
+        <AuthError>{error}</AuthError>
+      );
+    }
   }
 
   render() {
@@ -49,23 +58,13 @@ class SignupForm extends Component {
 
         <CardSection>{this.renderButton()}</CardSection>
 
-        <View style={{ backgroundColor: '#fff' }}>
-          <Text style={styles.errorText}>{this.props.error}</Text>
-        </View>
+        <CardSection>{this.renderErrorText()}</CardSection>
 
         <CardSection style={{ paddingTop: 350 }} />
       </Card>
     );
   }
 }
-
-const styles = {
-  errorText: {
-    fontSize: 20,
-    alignSelf: 'center',
-    color: 'red'
-  }
-};
 
 const mapStateToProps = ({ auth: { error, loading } }) => ({ error, loading });
 

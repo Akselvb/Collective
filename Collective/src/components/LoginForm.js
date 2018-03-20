@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Actions } from 'react-native-router-flux';
 import { loginUser } from '../actions';
-import { Card, CardSection, Input, Button, Spinner } from './common';
+import { Card, CardSection, Input, Button, Spinner, AuthError } from './common';
 
 class LoginForm extends Component {
   onCreateAccountPress() {
@@ -13,6 +12,16 @@ class LoginForm extends Component {
 
   onLoginPress({ email, password }) {
     this.props.loginUser({ email, password });
+  }
+
+  renderErrorText() {
+    const error = this.props.error;
+
+    if (error) {
+      return (
+        <AuthError>{error}</AuthError>
+      );
+    }
   }
 
   renderLoginButton() {
@@ -44,9 +53,9 @@ class LoginForm extends Component {
 
         <CardSection>{this.renderLoginButton()}</CardSection>
 
-        <View style={{ backgroundColor: '#fff' }}>
-          <Text style={styles.errorText}>{this.props.error}</Text>
-        </View>
+
+        <CardSection>{this.renderErrorText()}</CardSection>
+
 
         <CardSection style={{ paddingTop: 180 }} />
 
@@ -65,14 +74,6 @@ class LoginForm extends Component {
     );
   }
 }
-
-const styles = {
-  errorText: {
-    fontSize: 20,
-    alignSelf: 'center',
-    color: 'red'
-  }
-};
 
 const validate = ({ email, password }) => {
   const errors = {};
