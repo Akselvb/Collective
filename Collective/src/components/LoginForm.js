@@ -55,7 +55,7 @@ class LoginForm extends Component {
         </CardSection>
 
         <CardSection>
-          <Button>Sign in with Google</Button>
+          <Button onPress={this.props.loginWithGoogle}>Sign in with Google</Button>
         </CardSection>
 
         <CardSection>
