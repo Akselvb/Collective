@@ -22,13 +22,11 @@ export const loginUser = ({ email, password }) => dispatch => {
 };
 
 const loginUserSuccess = (dispatch, user) => {
+  isUserInCollective({ user });
   dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
-
-  isUserInCollective({ user });
-  Actions.main();
 };
 
 const loginUserFail = (dispatch, errorMessage) => {
@@ -85,9 +83,9 @@ const isUserInCollective = ({ user }) => {
   const ref = firebase.database().ref('usersInCollective');
   ref.child(user.uid).once('value', snapshot => {
      if (snapshot.val() !== null) {
-       console.log('Vi går direkte til kollektivet');
+       Actions.home();
      } else {
-       console.log('Vi får til opprett eller join kollektiv');
+       Actions.createJoinCollective();
      }
   });
 };

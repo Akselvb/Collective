@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Card, CardSection } from './common';
 
 class Home extends Component {
+
   render() {
     return (
       <Card>
