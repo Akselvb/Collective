@@ -18,9 +18,7 @@ class LoginForm extends Component {
     const error = this.props.error;
 
     if (error) {
-      return (
-        <AuthError>{error}</AuthError>
-      );
+      return <AuthError>{error}</AuthError>;
     }
   }
 
@@ -53,9 +51,7 @@ class LoginForm extends Component {
 
         <CardSection>{this.renderLoginButton()}</CardSection>
 
-
         <CardSection>{this.renderErrorText()}</CardSection>
-
 
         <CardSection style={{ paddingTop: 180 }} />
 

@@ -26,6 +26,8 @@ class App extends Component {
       messagingSenderId: FB_MESSAGING_SENDER_ID
     };
     firebase.initializeApp(config);
+
+    console.ignoredYellowBox = ['Remote debugger'];
   }
 
   render() {
