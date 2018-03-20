@@ -1,3 +1,4 @@
+import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import {
   CREATE_COLLECTIVE,
@@ -29,13 +30,7 @@ const joinCollectiveSuccess = (disptach, { user, collectiveId }) => {
   firebase.database().ref(`usersInCollective/${user.uid}`)
     .push(user.uid);
 
-  console.log('Jeee');
-  /*
-  disptach({
-    type: JOIN_COLLECTIVE_FAIL,
-    payload: collectiveId
-  });
-  */
+  Actions.main();
 };
 
 

@@ -7,9 +7,9 @@ import { Card, CardSection, Input, Button, Spinner, AuthError } from './common';
 
 class JoinCollective extends Component {
 
-  onJoinCollectivePress({ user, collectiveId }) {
-    console.log({ user });
-    console.log('Hvordan hente user objekt?');
+  onJoinCollectivePress({ collectiveId }) {
+    const user = this.props.user;
+    
     this.props.joinCollective({ user, collectiveId });
   }
 
