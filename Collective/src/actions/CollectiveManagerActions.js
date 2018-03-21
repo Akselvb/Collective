@@ -41,8 +41,8 @@ const joinCollectiveFail = (disptach, collectiveId) => {
   });
 };
 
-export const createCollective = ({ user }) => dispatch => {
-  const collectiveId = '123-123';
+export const createCollective = ({ user }, collectiveName) => dispatch => {
+  const collectiveId = getCollectiveId();
 
   // Push user to correct collective.
   firebase.database().ref(`collectiveId/${collectiveId}/users/`)
@@ -52,8 +52,28 @@ export const createCollective = ({ user }) => dispatch => {
   firebase.database().ref(`usersInCollective/${user.uid}`)
     .push(user.uid);
 
+  // Map collectiveId and collectiveName.
+  firebase.database().ref('collectiveId_collectiveName')
+    .push({ ID: collectiveId, name: collectiveName.collectiveName });
+
     dispatch({
       type: CREATE_COLLECTIVE,
       payload: [collectiveId, user]
     });
+
+    Actions.main();
+};
+
+const getCollectiveId = () => {
+  let id = '';
+  const numbers = '0123456789';
+
+  for (let i = 0; i < 9; i++) {
+    if (i === 4) {
+      id += '-';
+    } else {
+    id += numbers.charAt(Math.floor(Math.random() * numbers.length));
+    }
+  }
+  return id;
 };

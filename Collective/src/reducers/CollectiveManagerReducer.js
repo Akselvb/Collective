@@ -16,7 +16,6 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOGIN_USER_SUCCESS:
       return { ...state, user: action.payload };
-      
     case CREATE_COLLECTIVE:
       return { ...state, loading: true, error: '' };
     case JOIN_COLLECTIVE:
