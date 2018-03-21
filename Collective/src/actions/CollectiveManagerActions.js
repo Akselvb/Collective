@@ -6,6 +6,9 @@ import {
 } from './types';
 
 
+/*
+  Join collective. Invoked by onJoinCollectivePress() in JoinCollective.js.
+*/
 export const joinCollective = ({ user, collectiveId }) => dispatch => {
   const ref = firebase.database().ref('collectives');
   ref
@@ -21,6 +24,9 @@ export const joinCollective = ({ user, collectiveId }) => dispatch => {
 };
 
 
+/*
+  Invoked when user types collectiveId that exist.
+*/
 const joinCollectiveSuccess = (disptach, { user, collectiveId }) => {
   // Push user to correct collective.
   addUserToCollectives({ user }, collectiveId);
@@ -31,29 +37,10 @@ const joinCollectiveSuccess = (disptach, { user, collectiveId }) => {
   Actions.main();
 };
 
-const addUserToUsersInCollective = ({ user }, collectiveId) => {
-  firebase
-    .database()
-    .ref(`usersInCollective/${user.uid}`)
-    .set(collectiveId);
-};
 
-
-const addUserToCollectives = ({ user }, collectiveId) => {
-  firebase
-    .database()
-    .ref(`collectives/${collectiveId}`)
-    .push(user.uid);
-};
-
-const addCollectiveIdAndCollectiveName = (collectiveId, collectiveName) => {
-  firebase
-    .database()
-    .ref(`id_name/${collectiveId}`)
-    .set(collectiveName.collectiveName);
-};
-
-
+/*
+  Invoked when user types collectiveId that does not exist.
+*/
 const joinCollectiveFail = (disptach, collectiveId) => {
   disptach({
     type: JOIN_COLLECTIVE_FAIL,
@@ -61,7 +48,12 @@ const joinCollectiveFail = (disptach, collectiveId) => {
   });
 };
 
+
+/*
+  Create new collective. Invoked by onCreateCollectivePress() in CreateCollective.js.
+*/
 export const createCollective = ({ user }, collectiveName) => dispatch => {
+  // Generate collective id.
   const collectiveId = getCollectiveId();
 
   // Push user to correct collective.
@@ -73,14 +65,52 @@ export const createCollective = ({ user }, collectiveName) => dispatch => {
   // Map collectiveId and collectiveName.
   addCollectiveIdAndCollectiveName(collectiveId, collectiveName);
 
-    dispatch({
-      type: CREATE_COLLECTIVE,
-      payload: [collectiveId, user]
-    });
+  dispatch({
+    type: CREATE_COLLECTIVE,
+    payload: [collectiveId, user]
+  });
 
-    Actions.main();
+  Actions.main();
 };
 
+
+/*
+  Add user to list of users in collective.
+*/
+const addUserToUsersInCollective = ({ user }, collectiveId) => {
+  firebase
+    .database()
+    .ref(`usersInCollective/${user.uid}`)
+    .set(collectiveId);
+};
+
+
+/*
+  Add user to correct collective.
+*/
+const addUserToCollectives = ({ user }, collectiveId) => {
+  firebase
+    .database()
+    .ref(`collectives/${collectiveId}`)
+    .push(user.uid);
+};
+
+
+/*
+  Map between collectiveId and collectiveName.
+*/
+const addCollectiveIdAndCollectiveName = (collectiveId, collectiveName) => {
+  firebase
+    .database()
+    .ref(`id_name/${collectiveId}`)
+    .set(collectiveName.collectiveName);
+};
+
+
+/*
+  Generate a collective id.
+  TODO: Make sure the ID is unique.
+*/
 const getCollectiveId = () => {
   let id = '';
   const numbers = '0123456789';

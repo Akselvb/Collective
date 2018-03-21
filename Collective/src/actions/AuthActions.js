@@ -8,6 +8,7 @@ import {
   SIGNUP_USER_FAIL
 } from './types';
 
+
 /*
   LOGIN EMAIL ACCOUNT.
 */
@@ -21,6 +22,7 @@ export const loginUser = ({ email, password }) => dispatch => {
     .catch(error => loginUserFail(dispatch, error.message));
 };
 
+
 const loginUserSuccess = (dispatch, user) => {
   isUserInCollective({ user });
   dispatch({
@@ -29,12 +31,14 @@ const loginUserSuccess = (dispatch, user) => {
   });
 };
 
+
 const loginUserFail = (dispatch, errorMessage) => {
   dispatch({
     type: LOGIN_USER_FAIL,
     payload: errorMessage
   });
 };
+
 
 /*
   CREATE AN ACCOUNT.
@@ -50,6 +54,7 @@ export const signupUser = ({ email, password }) => dispatch => {
       signupUserFail(dispatch, error.message);
     });
 };
+
 
 const signupUserFail = (dispatch, errorMessage) => {
   dispatch({
