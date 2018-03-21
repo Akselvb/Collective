@@ -7,7 +7,7 @@ import {
 
 
 export const joinCollective = ({ user, collectiveId }) => dispatch => {
-  const ref = firebase.database().ref('collectiveId');
+  const ref = firebase.database().ref('collectives');
   ref
     .child(collectiveId.toString())
     .once('value', snapshot => {
@@ -23,14 +23,34 @@ export const joinCollective = ({ user, collectiveId }) => dispatch => {
 
 const joinCollectiveSuccess = (disptach, { user, collectiveId }) => {
   // Push user to correct collective.
-  firebase.database().ref(`collectiveId/${collectiveId}/users/`)
-    .push(user.uid);
+  addUserToCollectives({ user }, collectiveId);
 
   // Push user to list of users in collective.
-  firebase.database().ref(`usersInCollective/${user.uid}`)
-    .push(user.uid);
+  addUserToUsersInCollective({ user }, collectiveId);
 
   Actions.main();
+};
+
+const addUserToUsersInCollective = ({ user }, collectiveId) => {
+  firebase
+    .database()
+    .ref(`usersInCollective/${user.uid}`)
+    .set(collectiveId);
+};
+
+
+const addUserToCollectives = ({ user }, collectiveId) => {
+  firebase
+    .database()
+    .ref(`collectives/${collectiveId}`)
+    .push(user.uid);
+};
+
+const addCollectiveIdAndCollectiveName = (collectiveId, collectiveName) => {
+  firebase
+    .database()
+    .ref(`id_name/${collectiveId}`)
+    .set(collectiveName.collectiveName);
 };
 
 
@@ -45,16 +65,13 @@ export const createCollective = ({ user }, collectiveName) => dispatch => {
   const collectiveId = getCollectiveId();
 
   // Push user to correct collective.
-  firebase.database().ref(`collectiveId/${collectiveId}/users/`)
-    .push(user.uid);
+  addUserToCollectives({ user }, collectiveId);
 
   // Push user to list of users in collective.
-  firebase.database().ref(`usersInCollective/${user.uid}`)
-    .push(user.uid);
+  addUserToUsersInCollective({ user }, collectiveId);
 
   // Map collectiveId and collectiveName.
-  firebase.database().ref('collectiveId_collectiveName')
-    .push({ ID: collectiveId, name: collectiveName.collectiveName });
+  addCollectiveIdAndCollectiveName(collectiveId, collectiveName);
 
     dispatch({
       type: CREATE_COLLECTIVE,
