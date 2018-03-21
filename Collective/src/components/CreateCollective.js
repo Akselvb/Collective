@@ -36,7 +36,12 @@ class CreateCollective extends Component {
         </CardSection>
 
         <CardSection>
-          <Field name="collectiveName" label="Collective name" placeholder="My Awesome Collective" component={Input} />
+          <Field
+            name="collectiveName"
+            label="Collective name"
+            placeholder="My Awesome Collective"
+            component={Input}
+          />
         </CardSection>
 
         <CardSection>{this.renderButton()}</CardSection>

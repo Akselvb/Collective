@@ -5,7 +5,9 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   SIGNUP_USER,
-  SIGNUP_USER_FAIL
+  SIGNUP_USER_FAIL,
+  OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
+  NAME_OF_COLLECTIVE_RETRIEVED
 } from './types';
 
 
@@ -24,11 +26,7 @@ export const loginUser = ({ email, password }) => dispatch => {
 
 
 const loginUserSuccess = (dispatch, user) => {
-  isUserInCollective({ user });
-  dispatch({
-    type: LOGIN_USER_SUCCESS,
-    payload: user
-  });
+  isUserInCollective(dispatch, { user });
 };
 
 
@@ -67,13 +65,51 @@ const signupUserFail = (dispatch, errorMessage) => {
 /*
   LOGIN SEMANTICS.
 */
-const isUserInCollective = ({ user }) => {
-  const ref = firebase.database().ref('usersInCollective');
-  ref.child(user.uid).once('value', snapshot => {
-     if (snapshot.val() !== null) {
-       Actions.home();
-     } else {
-       Actions.collectiveManager();
-     }
+const isUserInCollective = (dispatch, { user }) => {
+  firebase
+    .database()
+    .ref('usersInCollective')
+    .child(user.uid)
+    .once('value', snapshot => {
+       if (snapshot.val() !== null) {
+         // Get all users of collective.
+         firebase
+            .database()
+            .ref(`collectives/${snapshot.val()}`)
+            .on('value', userSnapshot => {
+              const userEmails = [];
+              console.log(userSnapshot.val());
+              for (const property in userSnapshot.val()) {
+                if (userSnapshot.val().hasOwnProperty(property)) {
+                  console.log(property);
+                }
+              }
+              dispatch({
+                type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
+                payload: userEmails
+              });
+            });
+
+         // Get the name of the collective.
+         firebase
+           .database()
+           .ref(`id_name/${snapshot.val()}`)
+           .on('value', nameSnapshot => {
+             const collectiveName = nameSnapshot.val();
+
+             dispatch({
+               type: NAME_OF_COLLECTIVE_RETRIEVED,
+               payload: [collectiveName, snapshot.val()]
+             });
+
+         dispatch({
+           type: LOGIN_USER_SUCCESS,
+           payload: user
+         });
+         Actions.home();
+           });
+       } else {
+         Actions.collectiveManager();
+       }
   });
 };

@@ -10,8 +10,9 @@ import {
   Join collective. Invoked by onJoinCollectivePress() in JoinCollective.js.
 */
 export const joinCollective = ({ user, collectiveId }) => dispatch => {
-  const ref = firebase.database().ref('collectives');
-  ref
+  firebase
+    .database()
+    .ref('collectives')
     .child(collectiveId.toString())
     .once('value', snapshot => {
       // If collecticeId exists.
