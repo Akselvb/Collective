@@ -71,6 +71,9 @@ export const createCollective = ({ user }, collectiveName) => dispatch => {
   // Map collectiveId and collectiveName.
   addCollectiveIdAndCollectiveName(collectiveId, collectiveName);
 
+  // Retrieve collective information.
+  retrieveCollectiveInformation(dispatch, { collectiveId });
+
   dispatch({
     type: CREATE_COLLECTIVE,
     payload: [collectiveId, user]
@@ -130,14 +133,14 @@ const retrieveCollectiveInformation = (dispatch, { collectiveId }) => {
 */
 const getAllUsersInCollective = (dispatch, { collectiveId }) => {
   firebase
-     .database()
-     .ref(`collectives/${collectiveId}`)
-     .on('value', userSnapshot => {
-       dispatch({
-         type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
-         payload: userSnapshot.val()
-       });
-     });
+    .database()
+    .ref(`collectives/${collectiveId}`)
+    .on('value', userSnapshot => {
+      dispatch({
+        type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
+        payload: userSnapshot.val()
+      });
+    });
 };
 
 

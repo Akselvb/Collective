@@ -14,6 +14,9 @@ import {
 /*
   LOGIN EMAIL ACCOUNT.
 */
+/*
+  Called by onLoginPress() in LoginForm.
+*/
 export const loginUser = ({ email, password }) => dispatch => {
   dispatch({ type: LOGIN_USER });
 
@@ -25,11 +28,88 @@ export const loginUser = ({ email, password }) => dispatch => {
 };
 
 
+/*
+  Called by loginUser() when successfull.
+*/
 const loginUserSuccess = (dispatch, user) => {
   isUserInCollective(dispatch, { user });
+
+  dispatch({
+    type: LOGIN_USER_SUCCESS,
+    payload: user
+  });
 };
 
 
+/*
+  Checks whether user is in collective or not.
+  If user is in collective, get other users inn collective and collective name,
+  then go to Home.
+
+  If not, go to CollectiveManager.
+*/
+const isUserInCollective = (dispatch, { user }) => {
+  firebase
+    .database()
+    .ref('usersInCollective')
+    .child(user.uid)
+    .once('value', snapshot => {
+       if (snapshot.val() !== null) {
+         const collectiveId = snapshot.val();
+
+         // Get all users of collective.
+         getOtherUsersInCollective(dispatch, collectiveId);
+
+         // Get the name of the collective.
+         getCollectiveName(dispatch, collectiveId);
+
+         // Redirect user to Home.
+         Actions.home();
+       } else {
+         // Redirect user to CollectiveManager.
+         Actions.collectiveManager();
+       }
+    });
+};
+
+
+/*
+  Gets the other users related to the specified collective. Called by isUserInCollective().
+*/
+const getOtherUsersInCollective = (dispatch, collectiveId) => {
+  firebase
+    .database()
+    .ref(`collectives/${collectiveId}`)
+    .on('value', userSnapshot => {
+      dispatch({
+        type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
+        payload: userSnapshot.val()
+      });
+    });
+};
+
+
+/*
+  Gets the collective name from firebase. Called by isUserInCollective().
+*/
+const getCollectiveName = (dispatch, collectiveId) => {
+  firebase
+    .database()
+    .ref(`id_name/${collectiveId}`)
+    .on('value', nameSnapshot => {
+      const collectiveName = nameSnapshot.val();
+
+      dispatch({
+        type: NAME_OF_COLLECTIVE_RETRIEVED,
+        payload: [collectiveName, collectiveId]
+      });
+    });
+};
+
+
+/*
+  Called when user credentials do not meet the criterias.
+*/
 const loginUserFail = (dispatch, errorMessage) => {
   dispatch({
     type: LOGIN_USER_FAIL,
@@ -40,6 +120,10 @@ const loginUserFail = (dispatch, errorMessage) => {
 
 /*
   CREATE AN ACCOUNT.
+*/
+
+/*
+  Called by onPress() in SignupForm.
 */
 export const signupUser = ({ email, password }) => dispatch => {
   dispatch({ type: SIGNUP_USER });
@@ -54,58 +138,12 @@ export const signupUser = ({ email, password }) => dispatch => {
 };
 
 
+/*
+  Called when user credentials do not meet the criterias.
+*/
 const signupUserFail = (dispatch, errorMessage) => {
   dispatch({
     type: SIGNUP_USER_FAIL,
     payload: errorMessage
-  });
-};
-
-
-/*
-  LOGIN SEMANTICS.
-*/
-const isUserInCollective = (dispatch, { user }) => {
-  firebase
-    .database()
-    .ref('usersInCollective')
-    .child(user.uid)
-    .once('value', snapshot => {
-       if (snapshot.val() !== null) {
-         // Get all users of collective.
-         firebase
-            .database()
-            .ref(`collectives/${snapshot.val()}`)
-            .on('value', userSnapshot => {
-              dispatch({
-                type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
-                payload: userSnapshot.val()
-              });
-            });
-
-         // Get the name of the collective.
-         firebase
-           .database()
-           .ref(`id_name/${snapshot.val()}`)
-           .on('value', nameSnapshot => {
-             const collectiveName = nameSnapshot.val();
-
-             dispatch({
-               type: NAME_OF_COLLECTIVE_RETRIEVED,
-               payload: [collectiveName, snapshot.val()]
-             });
-         dispatch({
-           type: LOGIN_USER_SUCCESS,
-           payload: user
-         });
-         Actions.home();
-           });
-       } else {
-         dispatch({
-           type: LOGIN_USER_SUCCESS,
-           payload: user
-         });
-         Actions.collectiveManager();
-       }
   });
 };

@@ -6,6 +6,7 @@ import { loginUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner, AuthError } from './common';
 
 class LoginForm extends Component {
+  
   onCreateAccountPress() {
     Actions.signup();
   }
