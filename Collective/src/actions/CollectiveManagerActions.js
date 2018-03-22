@@ -17,7 +17,7 @@ export const joinCollective = ({ user, collectiveId }) => dispatch => {
     .ref('collectives')
     .child(collectiveId.toString())
     .once('value', snapshot => {
-      // If collecticeId exists.
+      // If collectiveId exists.
      if (snapshot.val() !== null) {
        joinCollectiveSuccess(dispatch, { user, collectiveId });
      } else {
@@ -38,7 +38,7 @@ const joinCollectiveSuccess = (dispatch, { user, collectiveId }) => {
   addUserToUsersInCollective({ user }, collectiveId);
 
   // Retrieve collective information.
-  retrieveCollectiveInformation(dispatch, { user, collectiveId });
+  retrieveCollectiveInformation(dispatch, { collectiveId });
 
   Actions.main();
 };
@@ -116,8 +116,19 @@ const addCollectiveIdAndCollectiveName = (collectiveId, collectiveName) => {
 /*
   Retrieve collective information.
 */
-const retrieveCollectiveInformation = (dispatch, { user, collectiveId }) => {
+const retrieveCollectiveInformation = (dispatch, { collectiveId }) => {
   // Get all users of collective.
+  getAllUsersInCollective(dispatch, { collectiveId });
+
+  // Get the name of the collective.
+  getCollectiveName(dispatch, { collectiveId });
+};
+
+
+/*
+  Get other users in the same collective.
+*/
+const getAllUsersInCollective = (dispatch, { collectiveId }) => {
   firebase
      .database()
      .ref(`collectives/${collectiveId}`)
@@ -127,18 +138,23 @@ const retrieveCollectiveInformation = (dispatch, { user, collectiveId }) => {
          payload: userSnapshot.val()
        });
      });
+};
 
-   // Get the name of the collective.
-   firebase
-     .database()
-     .ref(`id_name/${collectiveId}`)
-     .on('value', nameSnapshot => {
-       const collectiveName = nameSnapshot.val();
-       dispatch({
-         type: NAME_OF_COLLECTIVE_RETRIEVED,
-         payload: [collectiveName, collectiveId]
-       });
-     });
+
+/*
+  Get name of the collective.
+*/
+const getCollectiveName = (dispatch, { collectiveId }) => {
+  firebase
+    .database()
+    .ref(`id_name/${collectiveId}`)
+    .on('value', nameSnapshot => {
+      const collectiveName = nameSnapshot.val();
+      dispatch({
+        type: NAME_OF_COLLECTIVE_RETRIEVED,
+        payload: [collectiveName, collectiveId]
+      });
+    });
 };
 
 
