@@ -21,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
     case NAME_OF_COLLECTIVE_RETRIEVED:
       return { ...state, collectiveName: action.payload[0], collectiveId: action.payload[1] };
     case OTHER_USERS_IN_COLLECTIVE_RETRIEVED:
-      return { ...state, otherUsers: action.payload };
+      return { ...state, otherUsers: action.payload.toString() };
     case LOGIN_USER_SUCCESS:
       return { ...state, user: action.payload };
 

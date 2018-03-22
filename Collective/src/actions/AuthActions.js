@@ -77,16 +77,9 @@ const isUserInCollective = (dispatch, { user }) => {
             .database()
             .ref(`collectives/${snapshot.val()}`)
             .on('value', userSnapshot => {
-              const userEmails = [];
-              console.log(userSnapshot.val());
-              for (const property in userSnapshot.val()) {
-                if (userSnapshot.val().hasOwnProperty(property)) {
-                  console.log(property);
-                }
-              }
               dispatch({
                 type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
-                payload: userEmails
+                payload: userSnapshot.val()
               });
             });
 
@@ -101,7 +94,6 @@ const isUserInCollective = (dispatch, { user }) => {
                type: NAME_OF_COLLECTIVE_RETRIEVED,
                payload: [collectiveName, snapshot.val()]
              });
-
          dispatch({
            type: LOGIN_USER_SUCCESS,
            payload: user
@@ -109,6 +101,10 @@ const isUserInCollective = (dispatch, { user }) => {
          Actions.home();
            });
        } else {
+         dispatch({
+           type: LOGIN_USER_SUCCESS,
+           payload: user
+         });
          Actions.collectiveManager();
        }
   });

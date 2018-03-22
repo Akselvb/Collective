@@ -27,7 +27,7 @@ class Home extends Component {
   renderOtherUsers() {
     return (
       <CardSection>
-        <Text>with Other users in collective: </Text>
+        <Text>Other users in collective: </Text>
         <Text style={{ fontWeight: 'bold' }}>{this.props.otherUsers}</Text>
       </CardSection>
     );

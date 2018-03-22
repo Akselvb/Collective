@@ -9,6 +9,7 @@ class JoinCollective extends Component {
 
   onJoinCollectivePress({ collectiveId }) {
     const user = this.props.user;
+    console.log(user);
 
     this.props.joinCollective({ user, collectiveId });
   }
