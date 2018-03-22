@@ -2,7 +2,9 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import {
   CREATE_COLLECTIVE,
-  JOIN_COLLECTIVE_FAIL
+  JOIN_COLLECTIVE_FAIL,
+  OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
+  NAME_OF_COLLECTIVE_RETRIEVED
 } from './types';
 
 
@@ -28,12 +30,15 @@ export const joinCollective = ({ user, collectiveId }) => dispatch => {
 /*
   Invoked when user types collectiveId that exist.
 */
-const joinCollectiveSuccess = (disptach, { user, collectiveId }) => {
+const joinCollectiveSuccess = (dispatch, { user, collectiveId }) => {
   // Push user to correct collective.
   addUserToCollectives({ user }, collectiveId);
 
   // Push user to list of users in collective.
   addUserToUsersInCollective({ user }, collectiveId);
+
+  // Retrieve collective information.
+  retrieveCollectiveInformation(dispatch, { user, collectiveId });
 
   Actions.main();
 };
@@ -105,6 +110,35 @@ const addCollectiveIdAndCollectiveName = (collectiveId, collectiveName) => {
     .database()
     .ref(`id_name/${collectiveId}`)
     .set(collectiveName.collectiveName);
+};
+
+
+/*
+  Retrieve collective information.
+*/
+const retrieveCollectiveInformation = (dispatch, { user, collectiveId }) => {
+  // Get all users of collective.
+  firebase
+     .database()
+     .ref(`collectives/${collectiveId}`)
+     .on('value', userSnapshot => {
+       dispatch({
+         type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
+         payload: userSnapshot.val()
+       });
+     });
+
+   // Get the name of the collective.
+   firebase
+     .database()
+     .ref(`id_name/${collectiveId}`)
+     .on('value', nameSnapshot => {
+       const collectiveName = nameSnapshot.val();
+       dispatch({
+         type: NAME_OF_COLLECTIVE_RETRIEVED,
+         payload: [collectiveName, collectiveId]
+       });
+     });
 };
 
 
