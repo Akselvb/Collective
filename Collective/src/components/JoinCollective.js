@@ -9,7 +9,7 @@ class JoinCollective extends Component {
 
   onJoinCollectivePress({ collectiveId }) {
     const user = this.props.user;
-    
+
     this.props.joinCollective({ user, collectiveId });
   }
 
@@ -49,7 +49,12 @@ class JoinCollective extends Component {
         </CardSection>
 
         <CardSection>
-          <Field name="collectiveId" label="Collective ID" placeholder="12345-12345" component={Input} />
+          <Field
+            name="collectiveId"
+            label="Collective ID"
+            placeholder="1234-5678"
+            component={Input}
+          />
         </CardSection>
 
         <CardSection>{this.renderButton()}</CardSection>
