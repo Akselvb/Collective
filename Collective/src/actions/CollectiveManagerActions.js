@@ -2,6 +2,8 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import {
   CREATE_COLLECTIVE,
+  JOIN_COLLECTIVE,
+  JOIN_COLLECTIVE_SUCCESS,
   JOIN_COLLECTIVE_FAIL,
   OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
   NAME_OF_COLLECTIVE_RETRIEVED
@@ -12,6 +14,11 @@ import {
   Join collective. Invoked by onJoinCollectivePress() in JoinCollective.js.
 */
 export const joinCollective = ({ user, collectiveId }) => dispatch => {
+  dispatch({
+    type: JOIN_COLLECTIVE,
+    payload: null
+  });
+
   firebase
     .database()
     .ref('collectives')
@@ -40,6 +47,11 @@ const joinCollectiveSuccess = (dispatch, { user, collectiveId }) => {
   // Retrieve collective information.
   retrieveCollectiveInformation(dispatch, { collectiveId });
 
+  dispatch({
+    type: JOIN_COLLECTIVE_SUCCESS,
+    payload: user
+  });
+
   Actions.main();
 };
 
@@ -48,9 +60,10 @@ const joinCollectiveSuccess = (dispatch, { user, collectiveId }) => {
   Invoked when user types collectiveId that does not exist.
 */
 const joinCollectiveFail = (disptach, collectiveId) => {
+  const errorMessage = `Collective ID ${collectiveId} does not exist.`;
   disptach({
     type: JOIN_COLLECTIVE_FAIL,
-    payload: collectiveId
+    payload: errorMessage
   });
 };
 

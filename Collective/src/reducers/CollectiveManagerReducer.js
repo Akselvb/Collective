@@ -1,6 +1,7 @@
 import {
   CREATE_COLLECTIVE,
   JOIN_COLLECTIVE,
+  JOIN_COLLECTIVE_SUCCESS,
   JOIN_COLLECTIVE_FAIL,
   LOGIN_USER_SUCCESS,
   NAME_OF_COLLECTIVE_RETRIEVED,
@@ -28,6 +29,8 @@ export default (state = INITIAL_STATE, action) => {
     case CREATE_COLLECTIVE:
       return { ...state, loading: true, error: '' };
     case JOIN_COLLECTIVE:
+      return { ...state, loading: true, error: '' };
+    case JOIN_COLLECTIVE_SUCCESS:
       return { ...state, loading: false, error: '', user: action.payload };
     case JOIN_COLLECTIVE_FAIL:
       return { ...state, loading: false, error: action.payload };
