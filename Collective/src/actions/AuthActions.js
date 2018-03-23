@@ -58,7 +58,7 @@ const isUserInCollective = (dispatch, { user }) => {
          const collectiveId = snapshot.val();
 
          // Get all users of collective.
-         getOtherUsersInCollective(dispatch, collectiveId);
+         getOtherUsersInCollective(dispatch, collectiveId, user.email);
 
          // Get the name of the collective.
          getCollectiveName(dispatch, collectiveId);
@@ -76,16 +76,26 @@ const isUserInCollective = (dispatch, { user }) => {
 /*
   Gets the other users related to the specified collective. Called by isUserInCollective().
 */
-const getOtherUsersInCollective = (dispatch, collectiveId) => {
+const getOtherUsersInCollective = (dispatch, collectiveId, userEmail) => {
+  const otherUsers = [];
   firebase
-    .database()
-    .ref(`collectives/${collectiveId}`)
-    .on('value', userSnapshot => {
-      dispatch({
-        type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
-        payload: userSnapshot.val()
+  .database()
+  .ref(`collectives/${collectiveId}`)
+  .on('value', snapshot => {
+    for (const key in snapshot.val()) {
+      firebase
+      .database()
+      .ref(`collectives/${collectiveId}/${key}/email`)
+      .on('value', snapshot1 => {
+        otherUsers.push(snapshot1.val());
       });
+    }
+    otherUsers.splice(otherUsers.indexOf(userEmail), 1);
+    dispatch({
+      type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
+      payload: otherUsers
     });
+  });
 };
 
 

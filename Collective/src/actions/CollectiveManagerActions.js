@@ -45,7 +45,7 @@ const joinCollectiveSuccess = (dispatch, { user, collectiveId }) => {
   addUserToUsersInCollective({ user }, collectiveId);
 
   // Retrieve collective information.
-  retrieveCollectiveInformation(dispatch, { collectiveId });
+  retrieveCollectiveInformation(dispatch, { user, collectiveId });
 
   dispatch({
     type: JOIN_COLLECTIVE_SUCCESS,
@@ -85,7 +85,7 @@ export const createCollective = ({ user }, collectiveName) => dispatch => {
   addCollectiveIdAndCollectiveName(collectiveId, collectiveName);
 
   // Retrieve collective information.
-  retrieveCollectiveInformation(dispatch, { collectiveId });
+  retrieveCollectiveInformation(dispatch, { user, collectiveId });
 
   dispatch({
     type: CREATE_COLLECTIVE,
@@ -111,10 +111,15 @@ const addUserToUsersInCollective = ({ user }, collectiveId) => {
   Add user to correct collective.
 */
 const addUserToCollectives = ({ user }, collectiveId) => {
+  const userObject = {
+    id: user.uid,
+    email: user.email
+  };
+
   firebase
     .database()
     .ref(`collectives/${collectiveId}`)
-    .push(user.uid);
+    .push(userObject);
 };
 
 
@@ -132,35 +137,45 @@ const addCollectiveIdAndCollectiveName = (collectiveId, collectiveName) => {
 /*
   Retrieve collective information.
 */
-const retrieveCollectiveInformation = (dispatch, { collectiveId }) => {
+const retrieveCollectiveInformation = (dispatch, { user, collectiveId }) => {
   // Get all users of collective.
-  getAllUsersInCollective(dispatch, { collectiveId });
+  getOtherUsersInCollective(dispatch, collectiveId, user.email);
 
   // Get the name of the collective.
-  getCollectiveName(dispatch, { collectiveId });
+  getCollectiveName(dispatch, collectiveId);
 };
 
 
 /*
-  Get other users in the same collective.
+  Gets the other users related to the specified collective.
 */
-const getAllUsersInCollective = (dispatch, { collectiveId }) => {
+const getOtherUsersInCollective = (dispatch, collectiveId, userEmail) => {
+  const otherUsers = [];
   firebase
-    .database()
-    .ref(`collectives/${collectiveId}`)
-    .on('value', userSnapshot => {
-      dispatch({
-        type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
-        payload: userSnapshot.val()
+  .database()
+  .ref(`collectives/${collectiveId}`)
+  .on('value', snapshot => {
+    for (const key in snapshot.val()) {
+      firebase
+      .database()
+      .ref(`collectives/${collectiveId}/${key}/email`)
+      .on('value', snapshot1 => {
+        otherUsers.push(snapshot1.val());
       });
+    }
+    otherUsers.splice(otherUsers.indexOf(userEmail), 1);
+    dispatch({
+      type: OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
+      payload: otherUsers
     });
+  });
 };
 
 
 /*
   Get name of the collective.
 */
-const getCollectiveName = (dispatch, { collectiveId }) => {
+const getCollectiveName = (dispatch, collectiveId) => {
   firebase
     .database()
     .ref(`id_name/${collectiveId}`)
