@@ -54,3 +54,4 @@ buck-out/
 
 .env.development
 .env.production
+.npmrc
