@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { signupUser } from '../actions';
-import { Card, CardSection, Input, Button, Spinner, AuthError } from './common';
+import { signupUser } from '../../actions';
+import { Card, CardSection, Input, Button, Spinner, AuthError } from '../common';
 
 class SignupForm extends Component {
 
@@ -24,9 +24,7 @@ class SignupForm extends Component {
     const error = this.props.error;
 
     if (error) {
-      return (
-        <AuthError>{error}</AuthError>
-      );
+      return <AuthError>{error}</AuthError>;
     }
   }
 

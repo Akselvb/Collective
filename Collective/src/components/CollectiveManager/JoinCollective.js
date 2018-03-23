@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Text } from 'react-native';
-import { joinCollective } from '../actions';
-import { Card, CardSection, Input, Button, Spinner, AuthError } from './common';
+import { joinCollective } from '../../actions';
+import { Card, CardSection, Input, Button, Spinner, AuthError } from '../common';
 
 class JoinCollective extends Component {
-
   onJoinCollectivePress({ collectiveId }) {
     const user = this.props.user;
 
@@ -17,9 +16,7 @@ class JoinCollective extends Component {
     const error = this.props.error;
 
     if (error) {
-      return (
-        <AuthError>{error}</AuthError>
-      );
+      return <AuthError>{error}</AuthError>;
     }
   }
 
@@ -31,9 +28,7 @@ class JoinCollective extends Component {
     }
 
     return (
-      <Button onPress={handleSubmit(this.onJoinCollectivePress.bind(this))}>
-        Join Collective
-      </Button>
+      <Button onPress={handleSubmit(this.onJoinCollectivePress.bind(this))}>Join Collective</Button>
     );
   }
 
@@ -60,15 +55,17 @@ class JoinCollective extends Component {
         <CardSection>{this.renderButton()}</CardSection>
 
         <CardSection>{this.renderErrorText()}</CardSection>
-
       </Card>
     );
   }
 }
 
-const mapStateToProps = ({
-  manager: { user, collectiveId, error, loading } }) =>
-  ({ user, collectiveId, error, loading });
+const mapStateToProps = ({ manager: { user, collectiveId, error, loading } }) => ({
+  user,
+  collectiveId,
+  error,
+  loading
+});
 
 export default reduxForm({ form: 'collectiveId' })(
   connect(mapStateToProps, {

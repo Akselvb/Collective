@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { createCollective } from '../actions';
-import { Card, CardSection, Input, Spinner, Button } from './common';
+import { createCollective } from '../../actions';
+import { Card, CardSection, Input, Spinner, Button } from '../common';
 
 class CreateCollective extends Component {
-
   onCreateCollectivePress(collectiveName) {
     const user = this.props.user;
 
@@ -30,7 +29,6 @@ class CreateCollective extends Component {
   render() {
     return (
       <Card>
-
         <CardSection>
           <Text style={{ fontSize: 26 }}>Create new Collective</Text>
         </CardSection>
@@ -45,7 +43,6 @@ class CreateCollective extends Component {
         </CardSection>
 
         <CardSection>{this.renderButton()}</CardSection>
-
       </Card>
     );
   }
@@ -61,12 +58,15 @@ const validate = ({ collectiveName }) => {
   return errors;
 };
 
-const mapStateToProps = ({
-  manager: { user, collectiveId, error, loading } }) =>
-  ({ user, collectiveId, error, loading });
+const mapStateToProps = ({ manager: { user, collectiveId, error, loading } }) => ({
+  user,
+  collectiveId,
+  error,
+  loading
+});
 
-  export default reduxForm({ form: 'collectiveName', validate })(
-    connect(mapStateToProps, {
-      createCollective
-    })(CreateCollective)
-  );
+export default reduxForm({ form: 'collectiveName', validate })(
+  connect(mapStateToProps, {
+    createCollective
+  })(CreateCollective)
+);

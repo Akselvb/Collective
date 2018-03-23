@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Button } from '../common';
 
 class CollectiveManager extends Component {
-
   onJoinCollectivePress() {
     Actions.joinCollective();
   }

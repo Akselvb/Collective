@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, CardSection } from './common';
+import { Card, CardSection } from '../common';
 
 class Home extends Component {
 
