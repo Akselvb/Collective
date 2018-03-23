@@ -5,6 +5,7 @@ import { signupUser } from '../../actions';
 import { Card, CardSection, Input, Button, Spinner, AuthError } from '../common';
 
 class SignupForm extends Component {
+
   onPress({ email, password }) {
     this.props.signupUser({ email, password });
   }
