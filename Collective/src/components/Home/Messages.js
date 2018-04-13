@@ -6,12 +6,7 @@ import { fetchMessages } from '../../actions';
 class Messages extends Component {
 
   getMessages() {
-    const collectiveId = this.props.collectiveId;
-
-    console.log('Hello FEILFEILFEIL!');
-
-    fetchMessages({ collectiveId });
-
+    this.props.fetchMessages();
 
     return (
       <View>
@@ -35,4 +30,6 @@ const mapStateToProps = ({
   chat: { isFetching, height } }) =>
   ({ isFetching, height });
 
-export default connect(mapStateToProps)(Messages);
+export default connect(mapStateToProps, {
+  fetchMessages
+})(Messages);

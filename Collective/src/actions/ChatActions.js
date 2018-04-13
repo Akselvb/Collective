@@ -11,7 +11,7 @@ export const fetchMessages = () => dispatch => {
 
   firebase
     .database()
-    .ref(`collectives/${collectiveId}/chatroom/messages`)
+    .ref('id_name')
     .on('value', snapshot => {
       // Gets around Redux panicking about actions in reducers
       setTimeout(() => {
