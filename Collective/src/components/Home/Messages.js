@@ -3,22 +3,20 @@ import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../../actions';
 
+let isCalled = false;
+
 class Messages extends Component {
-
-  getMessages() {
-    this.props.fetchMessages();
-
-    return (
-      <View>
-        <Text>collectiveId</Text>
-      </View>
-    );
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.collectiveId && !isCalled) {
+      isCalled = true;
+      nextProps.fetchMessages(nextProps.collectiveId);
+    }
   }
 
   render() {
     return (
       <View>
-        {this.getMessages()}
+        <Text>hei</Text>
       </View>
     );
   }
@@ -26,9 +24,11 @@ class Messages extends Component {
 }
 
 
-const mapStateToProps = ({
-  chat: { isFetching, height } }) =>
-  ({ isFetching, height });
+const mapStateToProps = ({ chat: { isFetching, height, collectiveId } }) => ({
+  isFetching,
+  height,
+  collectiveId
+});
 
 export default connect(mapStateToProps, {
   fetchMessages

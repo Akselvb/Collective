@@ -12,6 +12,7 @@ class Chat extends Component {
 
         <CardSection>
           <Text style={{ fontSize: 26 }}>Chat</Text>
+          <Text> {this.props.isFetching} </Text>
         </CardSection>
 
         <Messages />

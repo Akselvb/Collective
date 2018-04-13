@@ -6,17 +6,16 @@ import {
 } from './types';
 
 
-export const fetchMessages = () => dispatch => {
+export const fetchMessages = (collectiveId) => dispatch => {
   dispatch({ type: START_FETCHING_MESSAGES });
 
   firebase
     .database()
-    .ref('id_name')
+    .ref(`collectives/${collectiveId}/chatroom`)
     .on('value', snapshot => {
       // Gets around Redux panicking about actions in reducers
       setTimeout(() => {
         const messages = snapshot.val() || [];
-
         dispatch(receiveMessages(messages));
       }, 0);
     });
@@ -24,10 +23,13 @@ export const fetchMessages = () => dispatch => {
 
 
 export const receiveMessages = (messages) => dispatch => {
+  console.log(messages);
+  /*
   Object.values(messages).forEach(msg => dispatch({
     type: ADD_MESSAGE,
     payload: msg
   }));
+  */
 
   dispatch({ type: RECEIVED_MESSAGES });
 };
