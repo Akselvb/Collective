@@ -118,7 +118,7 @@ const addUserToCollectives = ({ user }, collectiveId) => {
 
   firebase
     .database()
-    .ref(`collectives/${collectiveId}`)
+    .ref(`collectives/${collectiveId}/users`)
     .push(userObject);
 };
 
@@ -153,12 +153,12 @@ const getOtherUsersInCollective = (dispatch, collectiveId, userEmail) => {
   const otherUsers = [];
   firebase
   .database()
-  .ref(`collectives/${collectiveId}`)
+  .ref(`collectives/${collectiveId}/users`)
   .on('value', snapshot => {
     for (const key in snapshot.val()) {
       firebase
       .database()
-      .ref(`collectives/${collectiveId}/${key}/email`)
+      .ref(`collectives/${collectiveId}/users/${key}/email`)
       .on('value', snapshot1 => {
         otherUsers.push(snapshot1.val());
       });

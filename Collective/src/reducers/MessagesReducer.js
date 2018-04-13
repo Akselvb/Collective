@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import {
-  ADD_MESSAGE,
-  SEND_MESSAGE
+  ADD_MESSAGE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -16,8 +15,6 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_MESSAGE:
       return { ...state, id: 1 };
-    case SEND_MESSAGE:
-      return { ...state, id: 2 };
     default:
       return state;
   }

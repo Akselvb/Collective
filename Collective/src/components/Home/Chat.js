@@ -1,34 +1,53 @@
 import React, { Component } from 'react';
-import { Text, TextInput } from 'react-native';
+import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { CardSection } from '../common';
+import { Card, CardSection, Input, Button } from '../common';
+import { sendMessage } from '../../actions';
 import Messages from './Messages';
 
 class Chat extends Component {
 
+  sendMessage({ chatInput }) {
+    const { collectiveId, user } = this.props;
+
+    this.props.sendMessage({ collectiveId, user }, chatInput);
+  }
+
+  renderButton() {
+    const { handleSubmit } = this.props;
+
+    return (
+      <Button onPress={handleSubmit(this.sendMessage.bind(this))}>Send Message!</Button>
+    );
+  }
+
   render() {
     return (
-      <CardSection>
+      <Card>
 
         <CardSection>
-          <Text style={{ fontSize: 26 }}>Chat</Text>
-          <Text> {this.props.isFetching} </Text>
+          <Field
+            name="chatInput"
+            label="Chat Input"
+            placeholder="Write something cool"
+            component={Input}
+          />
         </CardSection>
 
-        <Messages />
+        <CardSection>{this.renderButton()}</CardSection>
 
-        <CardSection>
-          <TextInput style={{ height: 40, width: 150, borderColor: 'gray', borderWidth: 1 }} />
-        </CardSection>
-
-      </CardSection>
+      </Card>
     );
   }
 }
 
 
 const mapStateToProps = ({
-  chat: { isFetching, height } }) =>
-  ({ isFetching, height });
+  chat: { isFetching, height, user, collectiveId } }) =>
+  ({ isFetching, height, user, collectiveId });
 
-export default connect(mapStateToProps)(Chat);
+export default reduxForm({ form: 'chatInput' })(
+  connect(mapStateToProps, {
+    sendMessage
+  })(Chat)
+);

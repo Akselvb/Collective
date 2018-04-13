@@ -53,10 +53,7 @@ class Home extends Component {
 
         </Card>
 
-        <Card>
-          <Chat />
-        </Card>
-
+        <Chat />
 
       </View>
     );
