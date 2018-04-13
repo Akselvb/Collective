@@ -9,10 +9,10 @@ const Message = ({ msg }) => (
   <Row>
     <View styleName="vertical">
       <View styleName="horizontal space-between">
-          <Subtitle>{moment(msg.time).from(Date.now())}</Subtitle>
+          <Subtitle>{msg.author}</Subtitle>
           <Caption>{moment(msg.time).from(Date.now())}</Caption>
         </View>
-      <Text styleName="multiline">{moment(msg.time).from(Date.now())}</Text>
+      <Text styleName="multiline">{msg.text}</Text>
     </View>
   </Row>
 );

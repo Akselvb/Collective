@@ -25,7 +25,7 @@ export default (state = INITIAL_STATE, action) => {
     case START_FETCHING_MESSAGES:
       return { ...state, isFetching: true };
     case RECEIVED_MESSAGES:
-      return { ...state, isFetching: false };
+      return { ...state, isFetching: false, messages: action.payload };
     case UPDATE_MESSAGES_HEIGHT:
       return { ...state, height: action.payload };
     case SEND_MESSAGE:

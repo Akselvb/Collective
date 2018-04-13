@@ -29,7 +29,10 @@ export const receiveMessages = (messages) => dispatch => {
     payload: msg
   }));
 
-  dispatch({ type: RECEIVED_MESSAGES });
+  dispatch({
+    type: RECEIVED_MESSAGES,
+    payload: messages
+  });
 };
 
 
