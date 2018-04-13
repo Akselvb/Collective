@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../../actions';
+import MessageList from './MessageList';
 
 let isCalled = false;
 
@@ -15,19 +15,22 @@ class Messages extends Component {
 
   render() {
     return (
-      <View>
-        <Text>hei</Text>
-      </View>
+      <MessageList
+        messages={this.props.messages}
+        style={{ minHeight: 100 }}
+      />
+
     );
   }
 
 }
 
 
-const mapStateToProps = ({ chat: { isFetching, height, collectiveId } }) => ({
+const mapStateToProps = ({ chat: { isFetching, height, collectiveId, messages } }) => ({
   isFetching,
   height,
-  collectiveId
+  collectiveId,
+  messages
 });
 
 export default connect(mapStateToProps, {
