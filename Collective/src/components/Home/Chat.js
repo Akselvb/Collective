@@ -25,6 +25,8 @@ class Chat extends Component {
     return (
       <Card>
 
+        <Messages />
+
         <CardSection>
           <Field
             name="chatInput"

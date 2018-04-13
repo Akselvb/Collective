@@ -17,3 +17,4 @@ export const START_FETCHING_MESSAGES = 'start_fetching_messages';
 export const RECEIVED_MESSAGES = 'received_messages';
 export const UPDATE_MESSAGES_HEIGHT = 'update_message_height';
 export const SEND_MESSAGE = 'send_message';
+export const ADD_MESSAGE = 'add_message';

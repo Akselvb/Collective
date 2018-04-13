@@ -8,12 +8,11 @@ import {
 
 
 export const fetchMessages = (collectiveId) => dispatch => {
-  /*
   dispatch({ type: START_FETCHING_MESSAGES });
 
   firebase
     .database()
-    .ref(`collectives/${collectiveId}/chat`)
+    .ref(`collectives/${collectiveId}/chat/messages`)
     .on('value', snapshot => {
       // Gets around Redux panicking about actions in reducers
       setTimeout(() => {
@@ -21,7 +20,6 @@ export const fetchMessages = (collectiveId) => dispatch => {
         dispatch(receiveMessages(messages));
       }, 0);
     });
-    */
 };
 
 
@@ -37,16 +35,15 @@ export const receiveMessages = (messages) => dispatch => {
 
 export const sendMessage = ({ collectiveId, user }, message) => dispatch => {
   dispatch({ type: SEND_MESSAGE });
-  
+
   const msg = {
     text: message,
     time: Date.now(),
     author: user.email
   };
 
-
   firebase
     .database()
-    .ref(`collectives/${collectiveId}/chat`)
+    .ref(`collectives/${collectiveId}/chat/messages`)
     .push(msg);
 };

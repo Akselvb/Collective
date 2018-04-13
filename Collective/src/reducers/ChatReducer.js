@@ -4,12 +4,14 @@ import {
   RECEIVED_MESSAGES,
   UPDATE_MESSAGES_HEIGHT,
   LOGIN_USER_SUCCESS,
-  SEND_MESSAGE
+  SEND_MESSAGE,
+  ADD_MESSAGE
 } from '../actions/types';
 
 const INITIAL_STATE = {
   collectiveId: null,
   user: null,
+  messages: [],
   isFetching: false,
   height: null
 };
@@ -28,6 +30,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, height: action.payload };
     case SEND_MESSAGE:
       return { ...state, isFetching: false };
+    case ADD_MESSAGE:
+      return { ...state, messages: action.payload };
     default:
       return state;
   }
