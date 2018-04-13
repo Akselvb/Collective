@@ -3,10 +3,12 @@ import { reducer as form } from 'redux-form';
 import AuthReducer from './AuthReducer';
 import HomeReducer from './HomeReducer';
 import CollectiveManagerReducer from './CollectiveManagerReducer';
+import ChatReducer from './ChatReducer';
 
 export default combineReducers({
   form,
   auth: AuthReducer,
   manager: CollectiveManagerReducer,
-  home: HomeReducer
+  home: HomeReducer,
+  chat: ChatReducer
 });
