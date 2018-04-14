@@ -17,7 +17,7 @@ class Messages extends Component {
     return (
       <MessageList
         messages={this.props.messages}
-        style={{ minHeight: 100 }}
+        style={{ minHeight: 80 }}
       />
 
     );
@@ -26,9 +26,7 @@ class Messages extends Component {
 }
 
 
-const mapStateToProps = ({ chat: { isFetching, height, collectiveId, messages } }) => ({
-  isFetching,
-  height,
+const mapStateToProps = ({ chat: { collectiveId, messages } }) => ({
   collectiveId,
   messages
 });

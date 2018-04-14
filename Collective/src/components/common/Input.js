@@ -6,7 +6,8 @@ const Input = ({
   meta: { touched, error },
   label,
   placeholder,
-  secureTextEntry
+  secureTextEntry,
+  onSubmittingEdit
 }) => (
   <View style={styles.container}>
     <Text style={styles.label}>{label}</Text>
@@ -17,6 +18,7 @@ const Input = ({
       style={styles.input}
       autoCorrect={false}
       autoCapitalize="none"
+      onSubmittingEdit={onSubmittingEdit}
       {...restInput}
     />
     {touched && error && <Text style={styles.error}>{error}</Text>}

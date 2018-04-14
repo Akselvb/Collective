@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     ListView, Text, Row,
-    View, Subtitle, Caption
+    View, Subtitle, Caption,
+    Divider
 } from '@shoutem/ui';
 import moment from 'moment';
 
@@ -13,6 +14,7 @@ const Message = ({ msg }) => (
           <Caption>{moment(msg.time).from(Date.now())}</Caption>
         </View>
       <Text styleName="multiline">{msg.text}</Text>
+      <Divider styleName="line" />
     </View>
   </Row>
 );
