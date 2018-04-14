@@ -38,7 +38,7 @@ class Home extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <Card>
           <CardSection>
             <Text>Welcome, </Text>

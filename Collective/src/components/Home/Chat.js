@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from '../common';
 import { sendMessage } from '../../actions';
 import Messages from './Messages';
+
 
 class Chat extends Component {
 
@@ -23,22 +26,26 @@ class Chat extends Component {
 
   render() {
     return (
-      <Card>
+      <View style={{ flex: 1 }}>
+        <KeyboardAwareScrollView
+          ref="scroll"
+          onLayout={this.onScrollViewLayout}
+        >
+          <Messages />
+        </KeyboardAwareScrollView>
 
-        <Messages />
+          <CardSection>
+            <Field
+              name="chatInput"
+              placeholder="Write something cool"
+              component={Input}
+            />
+          </CardSection>
 
-        <CardSection>
-          <Field
-            name="chatInput"
-            label="Chat Input"
-            placeholder="Write something cool"
-            component={Input}
-          />
-        </CardSection>
+          <CardSection>{this.renderButton()}</CardSection>
 
-        <CardSection>{this.renderButton()}</CardSection>
 
-      </Card>
+      </View>
     );
   }
 }
