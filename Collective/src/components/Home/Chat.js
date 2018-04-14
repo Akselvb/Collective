@@ -9,12 +9,19 @@ import Messages from './Messages';
 
 class Chat extends Component {
 
+  /*
+    Called when Send Message button is pressed.
+    Calls sendMessage in ChatActions.
+  */
   sendMessage({ chatInput }) {
     const { collectiveId, user } = this.props;
 
     this.props.sendMessage({ collectiveId, user }, chatInput);
   }
 
+  /*
+    Send Message button.
+  */
   renderButton() {
     const { handleSubmit } = this.props;
 

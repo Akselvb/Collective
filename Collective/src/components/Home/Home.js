@@ -6,7 +6,9 @@ import Chat from './Chat';
 
 class Home extends Component {
 
-
+  /*
+    Get name of the collective.
+  */
   renderCollectiveName() {
     return (
       <CardSection>
@@ -16,6 +18,9 @@ class Home extends Component {
     );
   }
 
+  /*
+    Get id of collective.
+  */
   renderCollectiveId() {
     return (
       <CardSection>
@@ -25,6 +30,9 @@ class Home extends Component {
     );
   }
 
+  /*
+    Get other users.
+  */
   renderOtherUsers() {
     return (
       <CardSection>

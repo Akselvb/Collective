@@ -6,7 +6,9 @@ import {
   SEND_MESSAGE
 } from './types';
 
-
+/*
+  Called once, but always looking for new messages.
+*/
 export const fetchMessages = (collectiveId) => dispatch => {
   dispatch({ type: START_FETCHING_MESSAGES });
 
@@ -22,7 +24,9 @@ export const fetchMessages = (collectiveId) => dispatch => {
     });
 };
 
-
+/*
+  Loop through all messages and send them to reducer.
+*/
 export const receiveMessages = (messages) => dispatch => {
   Object.values(messages).forEach(msg => dispatch({
     type: ADD_MESSAGE,
@@ -35,7 +39,9 @@ export const receiveMessages = (messages) => dispatch => {
   });
 };
 
-
+/*
+  Push new message to firebase.
+*/
 export const sendMessage = ({ collectiveId, user }, message) => dispatch => {
   dispatch({ type: SEND_MESSAGE });
 
