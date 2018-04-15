@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { CardSection, StatusBarStyle, Header, SquareButton, Button } from '../common';
+import { CardSection, StatusBarStyle, Header, SquareButton } from '../common';
 import Chat from './Chat';
+import LibraryList from './LibraryList';
 
 class Home extends Component {
 
@@ -51,19 +52,13 @@ class Home extends Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBarStyle />
-        <View>
           <View style={{ flexDirection: 'row' }}>
             <SquareButton> Icon1 </SquareButton>
             {this.renderCollectiveName()}
             <SquareButton> Icon2 </SquareButton>
           </View>
 
-          {this.renderCollectiveId()}
-
-          {this.renderOtherUsers()}
-
-        </View>
-
+        <LibraryList />
         <Chat />
 
       </View>

@@ -4,11 +4,15 @@ import AuthReducer from './AuthReducer';
 import HomeReducer from './HomeReducer';
 import CollectiveManagerReducer from './CollectiveManagerReducer';
 import ChatReducer from './ChatReducer';
+import LibraryReducer from './LibraryReducer';
+import SelectionReducer from './SelectionReducer';
 
 export default combineReducers({
   form,
   auth: AuthReducer,
   manager: CollectiveManagerReducer,
   home: HomeReducer,
-  chat: ChatReducer
+  chat: ChatReducer,
+  libraries: LibraryReducer,
+  selectedLibraryId: SelectionReducer
 });
