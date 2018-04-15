@@ -23,9 +23,9 @@ class Home extends Component {
       <View style={{ flex: 1 }}>
         <StatusBarStyle />
           <View style={{ flexDirection: 'row' }}>
-            <SquareButton> Icon1 </SquareButton>
+            <SquareButton> Menu </SquareButton>
             {this.renderCollectiveName()}
-            <SquareButton> Icon2 </SquareButton>
+            <SquareButton> Noti </SquareButton>
           </View>
 
         <LibraryList />

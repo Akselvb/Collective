@@ -36,7 +36,7 @@ class Chat extends Component {
 
           <Messages />
 
-          <View style={{ borderColor: 'black', borderWidth: 1 }}>
+          <View style={{ borderColor: 'lightgray', borderWidth: 0.5 }}>
 
             <CardSection>
               <Field
