@@ -18,3 +18,5 @@ export const RECEIVED_MESSAGES = 'received_messages';
 export const UPDATE_MESSAGES_HEIGHT = 'update_message_height';
 export const SEND_MESSAGE = 'send_message';
 export const ADD_MESSAGE = 'add_message';
+
+export const SELECT_LIBRARY = 'select_library';
