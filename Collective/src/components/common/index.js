@@ -6,3 +6,4 @@ export * from './Input';
 export * from './Spinner';
 export * from './AuthError';
 export * from './StatusBarStyle';
+export * from './SquareButton';

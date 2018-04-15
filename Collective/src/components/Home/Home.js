@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { CardSection, StatusBarStyle, Header } from '../common';
+import { CardSection, StatusBarStyle, Header, SquareButton, Button } from '../common';
 import Chat from './Chat';
 
 class Home extends Component {
@@ -11,7 +11,9 @@ class Home extends Component {
   */
   renderCollectiveName() {
     return (
-      <Header backgroundColor='#30C5D2' headerText={this.props.collectiveName} />
+      <View style={{ flex: 1 }}>
+        <Header backgroundColor='#30C5D2' headerText={this.props.collectiveName} />
+      </View>
     );
   }
 
@@ -50,9 +52,11 @@ class Home extends Component {
       <View style={{ flex: 1 }}>
         <StatusBarStyle />
         <View>
-
-
-          {this.renderCollectiveName()}
+          <View style={{ flexDirection: 'row' }}>
+            <SquareButton> Icon1 </SquareButton>
+            {this.renderCollectiveName()}
+            <SquareButton> Icon2 </SquareButton>
+          </View>
 
           {this.renderCollectiveId()}
 
