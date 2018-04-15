@@ -5,7 +5,7 @@ import HomeReducer from './HomeReducer';
 import CollectiveManagerReducer from './CollectiveManagerReducer';
 import ChatReducer from './ChatReducer';
 import LibraryReducer from './LibraryReducer';
-import SelectionReducer from './SelectionReducer';
+import EventSelectionReducer from './EventSelectionReducer';
 
 export default combineReducers({
   form,
@@ -14,5 +14,5 @@ export default combineReducers({
   home: HomeReducer,
   chat: ChatReducer,
   libraries: LibraryReducer,
-  selectedLibraryId: SelectionReducer
+  selectedLibraryId: EventSelectionReducer
 });
