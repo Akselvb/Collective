@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection } from '../common';
+import Chat from './Chat';
 
 class Home extends Component {
 
-
+  /*
+    Get name of the collective.
+  */
   renderCollectiveName() {
     return (
       <CardSection>
@@ -15,6 +18,9 @@ class Home extends Component {
     );
   }
 
+  /*
+    Get id of collective.
+  */
   renderCollectiveId() {
     return (
       <CardSection>
@@ -24,6 +30,9 @@ class Home extends Component {
     );
   }
 
+  /*
+    Get other users.
+  */
   renderOtherUsers() {
     return (
       <CardSection>
@@ -37,19 +46,24 @@ class Home extends Component {
 
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Text>Welcome, </Text>
-          <Text style={{ fontWeight: 'bold' }}>{this.props.user.email}</Text>
-        </CardSection>
+      <View style={{ flex: 1 }}>
+        <Card>
+          <CardSection>
+            <Text>Welcome, </Text>
+            <Text style={{ fontWeight: 'bold' }}>{this.props.user.email}</Text>
+          </CardSection>
 
-        {this.renderCollectiveName()}
+          {this.renderCollectiveName()}
 
-        {this.renderCollectiveId()}
+          {this.renderCollectiveId()}
 
-        {this.renderOtherUsers()}
+          {this.renderOtherUsers()}
 
-      </Card>
+        </Card>
+
+        <Chat />
+
+      </View>
     );
   }
 }
