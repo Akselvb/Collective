@@ -22,6 +22,7 @@ class Messages extends Component {
   render() {
     return (
       <MessageList
+        user={this.props.user}
         messages={this.props.messages}
         style={{ minHeight: 50 }}
       />
@@ -29,9 +30,10 @@ class Messages extends Component {
   }
 }
 
-const mapStateToProps = ({ chat: { collectiveId, messages } }) => ({
+const mapStateToProps = ({ chat: { collectiveId, messages, user } }) => ({
   collectiveId,
-  messages
+  messages,
+  user
 });
 
 export default connect(mapStateToProps, {

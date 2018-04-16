@@ -1,66 +1,34 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, CardSection } from '../common';
+import { StatusBarStyle, Header, SquareButton } from '../common';
 import Chat from './Chat';
+import LibraryList from './LibraryList';
 
 class Home extends Component {
 
   /*
-    Get name of the collective.
+    Get name of the collective. Return header home.
   */
   renderCollectiveName() {
     return (
-      <CardSection>
-        <Text>You are part of collective: </Text>
-        <Text style={{ fontWeight: 'bold' }}>{this.props.collectiveName}</Text>
-      </CardSection>
-    );
-  }
-
-  /*
-    Get id of collective.
-  */
-  renderCollectiveId() {
-    return (
-      <CardSection>
-        <Text>with Collective ID: </Text>
-        <Text style={{ fontWeight: 'bold' }}>{this.props.collectiveId}</Text>
-      </CardSection>
-    );
-  }
-
-  /*
-    Get other users.
-  */
-  renderOtherUsers() {
-    return (
-      <CardSection>
-        <Text>Other users in collective: </Text>
-        <Text style={{ fontWeight: 'bold' }}>
-          {this.props.otherUsers}
-        </Text>
-      </CardSection>
+      <View style={{ flex: 1 }}>
+        <Header backgroundColor='#30C5D2' headerText={this.props.collectiveName} />
+      </View>
     );
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Card>
-          <CardSection>
-            <Text>Welcome, </Text>
-            <Text style={{ fontWeight: 'bold' }}>{this.props.user.email}</Text>
-          </CardSection>
+        <StatusBarStyle />
+          <View style={{ flexDirection: 'row' }}>
+            <SquareButton> Menu </SquareButton>
+            {this.renderCollectiveName()}
+            <SquareButton> Noti </SquareButton>
+          </View>
 
-          {this.renderCollectiveName()}
-
-          {this.renderCollectiveId()}
-
-          {this.renderOtherUsers()}
-
-        </Card>
-
+        <LibraryList />
         <Chat />
 
       </View>

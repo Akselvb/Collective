@@ -28,7 +28,7 @@ const RouterComponent = () => (
       </Scene>
 
       <Scene key="main" renderBackButton={() => <View />}>
-        <Scene key="home" component={Home} title="Home" />
+        <Scene key="home" component={Home} title="Home" hideNavBar />
       </Scene>
     </Scene>
   </Router>
