@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { StatusBarStyle, Header, SquareButton } from '../common';
 import Chat from './Chat';
-import LibraryList from './LibraryList';
+import Menu from '../Menu/Menu';
 
 class Home extends Component {
 
@@ -23,14 +23,11 @@ class Home extends Component {
       <View style={{ flex: 1 }}>
         <StatusBarStyle />
           <View style={{ flexDirection: 'row' }}>
-            <SquareButton> Menu </SquareButton>
             {this.renderCollectiveName()}
-            <SquareButton> Noti </SquareButton>
           </View>
 
-        <LibraryList />
+        <Menu />
         <Chat />
-
       </View>
     );
   }
