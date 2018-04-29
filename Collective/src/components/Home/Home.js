@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { StatusBarStyle, Header, SquareButton } from '../common';
+import { StatusBarStyle, Header } from '../common';
 import Chat from './Chat';
 import Menu from '../Menu/Menu';
 
@@ -18,6 +18,10 @@ class Home extends Component {
     );
   }
 
+  renderMenu() {
+    return <Menu />;
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -26,8 +30,10 @@ class Home extends Component {
             {this.renderCollectiveName()}
           </View>
 
-        <Menu />
+        {this.renderMenu()}
+
         <Chat />
+
       </View>
     );
   }

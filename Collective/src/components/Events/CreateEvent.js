@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { StatusBarStyle, Header } from '../common';
 import Menu from '../Menu/Menu';
 
-class Expenses extends Component {
+class CreateEvent extends Component {
   renderCollectiveName() {
     return (
       <View style={{ flex: 1 }}>
@@ -26,7 +26,8 @@ class Expenses extends Component {
           </View>
 
         {this.renderMenu()}
-      <Text> EXPENSES </Text>
+
+        <Text> CREATE EVENT </Text>
 
       </View>
     );
@@ -37,4 +38,4 @@ const mapStateToProps = ({
   manager: { user, collectiveId, collectiveName, otherUsers } }) =>
   ({ user, collectiveId, collectiveName, otherUsers });
 
-export default connect(mapStateToProps)(Expenses);
+export default connect(mapStateToProps)(CreateEvent);
