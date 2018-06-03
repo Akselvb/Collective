@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { StatusBarStyle, Header } from '../common';
-import Menu from '../Menu/Menu';
 import LibraryList from './LibraryList';
 
 class UpcomingEvents extends Component {
@@ -14,10 +13,6 @@ class UpcomingEvents extends Component {
     );
   }
 
-  renderMenu() {
-    return <Menu />;
-  }
-
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -25,8 +20,6 @@ class UpcomingEvents extends Component {
           <View style={{ flexDirection: 'row' }}>
             {this.renderCollectiveName()}
           </View>
-
-        {this.renderMenu()}
 
         <LibraryList />
 

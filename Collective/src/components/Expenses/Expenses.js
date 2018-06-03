@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { StatusBarStyle, Header } from '../common';
-import Menu from '../Menu/Menu';
 
 class Expenses extends Component {
   renderCollectiveName() {
@@ -13,10 +12,6 @@ class Expenses extends Component {
     );
   }
 
-  renderMenu() {
-    return <Menu />;
-  }
-
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -25,7 +20,6 @@ class Expenses extends Component {
             {this.renderCollectiveName()}
           </View>
 
-        {this.renderMenu()}
       <Text> EXPENSES </Text>
 
       </View>

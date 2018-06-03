@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { StatusBarStyle, Header } from '../common';
-import Menu from '../Menu/Menu';
 
 class CreateEvent extends Component {
   renderCollectiveName() {
@@ -13,10 +12,6 @@ class CreateEvent extends Component {
     );
   }
 
-  renderMenu() {
-    return <Menu />;
-  }
-
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -24,8 +19,6 @@ class CreateEvent extends Component {
           <View style={{ flexDirection: 'row' }}>
             {this.renderCollectiveName()}
           </View>
-
-        {this.renderMenu()}
 
         <Text> CREATE EVENT </Text>
 

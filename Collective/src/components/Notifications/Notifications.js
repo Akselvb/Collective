@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { StatusBarStyle, Header } from '../common';
-import Menu from '../Menu/Menu';
 
 class Notifications extends Component {
   renderCollectiveName() {
@@ -13,10 +12,6 @@ class Notifications extends Component {
     );
   }
 
-  renderMenu() {
-    return <Menu />;
-  }
-
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -24,8 +19,6 @@ class Notifications extends Component {
           <View style={{ flexDirection: 'row' }}>
             {this.renderCollectiveName()}
           </View>
-
-        {this.renderMenu()}
 
         <Text> NOTIFICATIONS </Text>
 
