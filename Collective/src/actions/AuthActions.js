@@ -64,7 +64,7 @@ const isUserInCollective = (dispatch, { user }) => {
          getCollectiveName(dispatch, collectiveId);
 
          // Redirect user to Home.
-         Actions.home();
+         Actions.routerPostLogin();
        } else {
          // Redirect user to CollectiveManager.
          Actions.collectiveManager();

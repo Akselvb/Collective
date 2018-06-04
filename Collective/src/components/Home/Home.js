@@ -3,37 +3,28 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { StatusBarStyle, Header } from '../common';
 import Chat from './Chat';
-import Menu from '../Menu/Menu';
 
 class Home extends Component {
 
   /*
     Get name of the collective. Return header home.
   */
-  renderCollectiveName() {
-    return (
-      <View style={{ flex: 1 }}>
-        <Header backgroundColor='#30C5D2' headerText={this.props.collectiveName} />
-      </View>
-    );
-  }
+  // renderCollectiveName() {
+  //   return (
+  //     <View style={{ flex: 1 }}>
+  //       <Header backgroundColor='#30C5D2' headerText={this.props.collectiveName} />
+  //     </View>
+  //   );
+  // }
+  // <View style={{ flexDirection: 'row' }}>
+  //   {this.renderCollectiveName()}
+  // </View>
 
-  renderMenu() {
-    return <Menu />;
-  }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <StatusBarStyle />
-          <View style={{ flexDirection: 'row' }}>
-            {this.renderCollectiveName()}
-          </View>
-
-        {this.renderMenu()}
-
         <Chat />
-
       </View>
     );
   }

@@ -4,7 +4,6 @@ import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import { configureFontAwesomePro } from 'react-native-fontawesome-pro';
-
 import {
   FB_API_KEY,
   FB_AUTH_DOMAIN,
@@ -20,6 +19,7 @@ import Router from './Router';
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 class App extends Component {
+
   componentWillMount() {
     const config = {
       apiKey: FB_API_KEY,
