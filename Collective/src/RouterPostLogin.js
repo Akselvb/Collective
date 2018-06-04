@@ -11,10 +11,10 @@ export default class RouterPostLogin extends Component {
   state = {
     index: 0,
     routes: [
-      { key: 'home', title: '1' },
-      { key: 'events', title: '2' },
-      { key: 'expenses', title: '3' },
-      { key: 'settings', title: '4' }
+      { key: 'home', title: 'Hjem' },
+      { key: 'events', title: 'Hendelser' },
+      { key: 'expenses', title: 'Utgifter' },
+      { key: 'settings', title: 'Innstillinger' }
     ],
   };
 
@@ -32,9 +32,9 @@ export default class RouterPostLogin extends Component {
   const inputRange = props.navigationState.routes.map((x, i) => i);
 
   return (
-    <View style={{ backgroundColor: '#6495ed' }}>
+    <View style={{ backgroundColor: '#f5f5f5' }}>
       <View style={styles.title}>
-        <Text style={{ fontSize: 20 }}>TITTEL HER DA</Text>
+        <Text style={{ fontSize: 20, color: '#72BA6F' }}>TITTEL HER DA</Text>
       </View>
 
       <View style={styles.tabBar}>
