@@ -11,10 +11,10 @@ export default class RouterPostLogin extends Component {
   state = {
     index: 0,
     routes: [
-      { key: 'home', title: 'Home' },
-      { key: 'events', title: 'Events' },
-      { key: 'expenses', title: 'Expenses' },
-      { key: 'settings', title: 'Settings' }
+      { key: 'home', title: '1' },
+      { key: 'events', title: '2' },
+      { key: 'expenses', title: '3' },
+      { key: 'settings', title: '4' }
     ],
   };
 

@@ -4,21 +4,22 @@ import { connect } from 'react-redux';
 import { StatusBarStyle, Header } from '../common';
 
 class CreateEvent extends Component {
-  renderCollectiveName() {
-    return (
-      <View style={{ flex: 1 }}>
-        <Header backgroundColor='#30C5D2' headerText={this.props.collectiveName} />
-      </View>
-    );
-  }
+  // renderCollectiveName() {
+  //   return (
+  //     <View style={{ flex: 1 }}>
+  //       <Header backgroundColor='#30C5D2' headerText={this.props.collectiveName} />
+  //     </View>
+  //   );
+  // }
+  // <StatusBarStyle />
+  //   <View style={{ flexDirection: 'row' }}>
+  //     {this.renderCollectiveName()}
+  //   </View>
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <StatusBarStyle />
-          <View style={{ flexDirection: 'row' }}>
-            {this.renderCollectiveName()}
-          </View>
+
 
         <Text> CREATE EVENT </Text>
 
