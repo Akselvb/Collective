@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Dimensions, TouchableOpacity, View, Animated, Text } from 'react-native';
-import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { TabView, SceneMap } from 'react-native-tab-view';
+import { connect } from 'react-redux';
 import Home from './components/Home/Home';
 import UpcomingEvents from './components/Events/UpcomingEvents';
 import Expenses from './components/Expenses/Expenses';
 import Settings from './components/Settings/Settings';
 
 
-export default class RouterPostLogin extends Component {
+class RouterPostLogin extends Component {
   state = {
     index: 0,
     routes: [
@@ -27,15 +28,21 @@ export default class RouterPostLogin extends Component {
     settings: Settings
   });
 
+  renderTitle() {
+    return (
+      <View style={styles.title}>
+        <Text style={{ fontSize: 20, color: '#72BA6F' }}>{this.props.collectiveName}</Text>
+      </View>
+    );
+  }
+
 
   renderTabBar = props => {
   const inputRange = props.navigationState.routes.map((x, i) => i);
 
   return (
     <View style={{ backgroundColor: '#f5f5f5' }}>
-      <View style={styles.title}>
-        <Text style={{ fontSize: 20, color: '#72BA6F' }}>TITTEL HER DA</Text>
-      </View>
+      {this.renderTitle()}
 
       <View style={styles.tabBar}>
 
@@ -93,3 +100,9 @@ const styles = ({
     paddingBottom: 4
   },
 });
+
+const mapStateToProps = ({
+  manager: { user, collectiveId, collectiveName, otherUsers } }) =>
+  ({ user, collectiveId, collectiveName, otherUsers });
+
+export default connect(mapStateToProps)(RouterPostLogin);

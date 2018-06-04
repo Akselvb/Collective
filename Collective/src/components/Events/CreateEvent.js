@@ -1,27 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { StatusBarStyle, Header } from '../common';
 
 class CreateEvent extends Component {
-  // renderCollectiveName() {
-  //   return (
-  //     <View style={{ flex: 1 }}>
-  //       <Header backgroundColor='#30C5D2' headerText={this.props.collectiveName} />
-  //     </View>
-  //   );
-  // }
-  // <StatusBarStyle />
-  //   <View style={{ flexDirection: 'row' }}>
-  //     {this.renderCollectiveName()}
-  //   </View>
 
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <View style={{ height: 22, backgroundColor: '#f5f5f5' }} />
 
-
-        <Text> CREATE EVENT </Text>
+        <Text> Her kommer det masse alternativ </Text>
 
       </View>
     );

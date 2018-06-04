@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import Chat from './Chat';
 
-class Home extends Component {
+class CreateExpense extends Component {
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Chat />
+        <View style={{ height: 22, backgroundColor: '#f5f5f5' }} />
+
+        <Text> Her kommer det masse alternativ </Text>
+
       </View>
     );
   }
@@ -18,4 +20,4 @@ const mapStateToProps = ({
   manager: { user, collectiveId, collectiveName, otherUsers } }) =>
   ({ user, collectiveId, collectiveName, otherUsers });
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(CreateExpense);

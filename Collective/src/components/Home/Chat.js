@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { CardSection, Input, Button } from '../common';
+import { Input, RoundButton } from '../common';
 import { sendMessage } from '../../actions';
 import Messages from './Messages';
 
@@ -26,7 +26,7 @@ class Chat extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <Button onPress={handleSubmit(this.sendMessage.bind(this))}>Send Message!</Button>
+      <RoundButton onPress={handleSubmit(this.sendMessage.bind(this))} />
     );
   }
 
@@ -34,16 +34,18 @@ class Chat extends Component {
     return (
       <View style={styles.containerStyle}>
           <Messages />
-          <View style={{ borderColor: 'lightgray', borderWidth: 0.5 }}>
-            <CardSection>
+
+            <View style={styles.containerStyle1}>
+
               <Field
                 name="chatInput"
-                placeholder="Skriv noe kult!"
+                placeholder="Aa"
                 component={Input}
               />
-            </CardSection>
-            <CardSection>{this.renderButton()}</CardSection>
+
+            {this.renderButton()}
           </View>
+
       </View>
     );
   }
@@ -56,6 +58,16 @@ const styles = {
     borderRadius: 2,
     borderColor: '#ddd',
     borderBottomWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1
+  },
+  containerStyle1: {
+    backgroundColor: '#fefefe',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,

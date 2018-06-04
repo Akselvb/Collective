@@ -40,14 +40,15 @@ const styles = {
     marginBottom: 5,
     borderColor: '#000',
     borderWidth: 1,
-    borderRadius: 3
+    borderRadius: 20
   },
   error: { fontSize: 12, color: 'red' },
   container: {
     flex: 1,
     flexDirection: 'column',
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
+    backgroundColor: '#fff'
   }
 };
 

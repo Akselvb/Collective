@@ -7,3 +7,4 @@ export * from './Spinner';
 export * from './AuthError';
 export * from './StatusBarStyle';
 export * from './SquareButton';
+export * from './RoundButton';

@@ -24,7 +24,6 @@ class Messages extends Component {
       <MessageList
         user={this.props.user}
         messages={this.props.messages}
-        style={{ minHeight: 50 }}
       />
     );
   }
