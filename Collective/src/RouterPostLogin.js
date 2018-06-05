@@ -14,7 +14,7 @@ class RouterPostLogin extends Component {
     routes: [
       { key: 'home', title: 'Hjem' },
       { key: 'events', title: 'Hendelser' },
-      { key: 'expenses', title: 'Utgifter' },
+      { key: 'expenses', title: 'Oppgjør' },
       { key: 'settings', title: 'Innstillinger' }
     ],
   };
