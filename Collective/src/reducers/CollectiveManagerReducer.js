@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   collectiveName: null,
   error: '',
   loading: false,
-  otherUsers: null
+  otherUsers: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -34,6 +34,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, loading: false, error: '', user: action.payload };
     case JOIN_COLLECTIVE_FAIL:
       return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }

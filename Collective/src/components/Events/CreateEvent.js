@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
+import { closeModal } from '../../actions';
+
 class CreateEvent extends Component {
+
+  setModalVisible(visible) {
+    this.props.closeModal(visible);
+  }
 
   render() {
     const { titleTextStyle, titleContainerStyle } = styles;
@@ -14,6 +20,10 @@ class CreateEvent extends Component {
         </View>
 
         <Text> Her kommer det masse alternativ EVENTS</Text>
+
+        <TouchableOpacity onPress={() => { this.setModalVisible(false); }} style={styles.createNewStyle} >
+          <Text style={styles.textStyle}>Avbryt</Text>
+        </TouchableOpacity>
 
       </View>
     );
@@ -39,11 +49,29 @@ const styles = {
     fontSize: 16,
     color: '#72BA6F',
     marginBottom: 10
+  },
+
+  textStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  createNewStyle: {
+    maxHeight: 40,
+    justifyContent: 'center',
+    flex: 1,
+    alignItems: 'center',
+    borderColor: 'lightgray',
+    borderBottomWidth: 0.5,
   }
+
 };
 
 const mapStateToProps = ({
-  manager: { user, collectiveId, collectiveName, otherUsers } }) =>
-  ({ user, collectiveId, collectiveName, otherUsers });
+  events: { collectiveName, otherUsers, modalVisible } }) =>
+  ({ collectiveName, otherUsers, modalVisible });
 
-export default connect(mapStateToProps)(CreateEvent);
+export default connect(mapStateToProps, {
+  closeModal
+})(CreateEvent);

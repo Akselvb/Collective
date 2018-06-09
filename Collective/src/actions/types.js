@@ -20,3 +20,6 @@ export const SEND_MESSAGE = 'send_message';
 export const ADD_MESSAGE = 'add_message';
 
 export const SELECT_LIBRARY = 'select_library';
+
+export const OPEN_MODAL = 'open_modal';
+export const CLOSE_MODAL = 'close_modal';
