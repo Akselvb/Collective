@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import LibraryList from './LibraryList';
-import CreateEvent from './CreateEvent';
+import RouterEvents from '../../RouterEvents';
+
+import { openModal } from '../../actions';
 
 class UpcomingEvents extends Component {
 
-  state = {
-    modalVisible: false,
-  };
-
   setModalVisible(visible) {
-    this.setState({ modalVisible: visible });
+    this.props.openModal(visible);
+  }
+
+  getOtherUsers() {
+    return this.props.otherUsers;
   }
 
   render() {
@@ -22,9 +24,9 @@ class UpcomingEvents extends Component {
         <Modal
           animationType="slide"
           transparent={false}
-          visible={this.state.modalVisible}
+          visible={this.props.modalVisible}
         >
-          <CreateEvent />
+          <RouterEvents />
         </Modal>
 
         <TouchableOpacity onPress={() => { this.setModalVisible(true); }} style={createNewStyle}>
@@ -33,7 +35,7 @@ class UpcomingEvents extends Component {
 
         <View style={filterStyle}>
           <Text style={textStyle}>
-            De andre i kollektivet. Her skal man kunne filtrere events ut i fra hvem som er trykket på.
+            {this.getOtherUsers()}
           </Text>
         </View>
 
@@ -70,7 +72,7 @@ const styles = {
   },
 
   containerStyle: {
-    flex: 10,
+    flex: 1,
     borderWidth: 1,
     borderRadius: 2,
     borderColor: '#ddd',
@@ -85,7 +87,9 @@ const styles = {
 };
 
 const mapStateToProps = ({
-  manager: { user, collectiveId, collectiveName, otherUsers } }) =>
-  ({ user, collectiveId, collectiveName, otherUsers });
+  events: { user, collectiveName, otherUsers, modalVisible } }) =>
+  ({ user, collectiveName, otherUsers, modalVisible });
 
-export default connect(mapStateToProps)(UpcomingEvents);
+export default connect(mapStateToProps, {
+  openModal
+})(UpcomingEvents);
