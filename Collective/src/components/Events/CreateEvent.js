@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 
-import { closeModal } from '../../actions';
+import { Button } from '../common';
+import {
+  closeModal,
+  onTitleChangeText,
+  onDescriptionChangeText,
+  onDateChange,
+  saveEvent
+ } from '../../actions';
 
 class CreateEvent extends Component {
 
+  onPress() {
+    const { collectiveId, title, description, date } = this.props;
+    this.props.saveEvent({ collectiveId }, title, description, date);
+    this.setModalVisible(false);
+  }
+
   setModalVisible(visible) {
     this.props.closeModal(visible);
+  }
+
+  renderButton() {
+    return <Button onPress={this.onPress.bind(this)}>Legg til</Button>;
   }
 
   render() {
@@ -20,9 +37,28 @@ class CreateEvent extends Component {
         <Text>Tittel</Text>
         <TextInput
           style={textInputStyle}
-          // onChangeText={(text) => this.setState({ text })}
-          // value={this.state.text}
+          onChangeText={(text) => this.props.onTitleChangeText({ text })}
         />
+      </View>
+
+      <View>
+        <Text>Beskrivelse</Text>
+        <TextInput
+          style={textInputStyle}
+          onChangeText={(text) => this.props.onDescriptionChangeText({ text })}
+        />
+      </View>
+
+      <View>
+        <Text>Dato</Text>
+        <TextInput
+          style={textInputStyle}
+          onChangeText={(text) => this.props.onDateChange({ text })}
+        />
+      </View>
+
+      <View style={{ minHeight: 40 }}>
+        {this.renderButton()}
       </View>
 
         <TouchableOpacity
@@ -78,9 +114,13 @@ const styles = {
 };
 
 const mapStateToProps = ({
-  events: { collectiveName, otherUsers, modalVisible } }) =>
-  ({ collectiveName, otherUsers, modalVisible });
+  events: { collectiveName, collectiveId, otherUsers, modalVisible, title, description, date } }) =>
+  ({ collectiveName, collectiveId, otherUsers, modalVisible, title, description, date });
 
 export default connect(mapStateToProps, {
-  closeModal
+  closeModal,
+  onTitleChangeText,
+  onDescriptionChangeText,
+  onDateChange,
+  saveEvent
 })(CreateEvent);

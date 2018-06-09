@@ -23,3 +23,6 @@ export const SELECT_LIBRARY = 'select_library';
 
 export const OPEN_MODAL = 'open_modal';
 export const CLOSE_MODAL = 'close_modal';
+export const ON_TITLE_CHANGE_TEXT = 'on_title_change_text';
+export const ON_DESCRIPTION_CHANGE_TEXT = 'on_description_change_text';
+export const ON_DATE_CHANGE = 'on_date_change';
