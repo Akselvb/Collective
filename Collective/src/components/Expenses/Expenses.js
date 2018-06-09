@@ -31,7 +31,8 @@ class Expenses extends Component {
         </CardSection>
 
         <CardSection>
-          <Text>De andre i kollektivet</Text>
+          <Text>{this.props.user.email}</Text>
+          <Text>{this.props.otherUsers}</Text>
         </CardSection>
 
         <CardSection>
@@ -56,8 +57,8 @@ class Expenses extends Component {
 }
 
 const mapStateToProps = ({
-  expenses: { collectiveId, otherUsers, isModalVisible } }) =>
-  ({ collectiveId, otherUsers, isModalVisible });
+  expenses: { user, collectiveId, otherUsers, isModalVisible } }) =>
+  ({ user, collectiveId, otherUsers, isModalVisible });
 
 export default connect(mapStateToProps, {
   setModalVisibilityExpenses

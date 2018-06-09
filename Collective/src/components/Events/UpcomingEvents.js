@@ -8,10 +8,6 @@ import { setModalVisibilityEvents } from '../../actions';
 
 class UpcomingEvents extends Component {
 
-  getOtherUsers() {
-    return this.props.otherUsers;
-  }
-
   render() {
     return (
       <Card>
@@ -32,10 +28,12 @@ class UpcomingEvents extends Component {
         </CardSection>
 
         <CardSection>
-          <Text>{this.getOtherUsers()}</Text>
+          <Text>{this.props.user.email}</Text>
+          <Text>{this.props.otherUsers}</Text>
         </CardSection>
 
         <LibraryList />
+
       </Card>
     );
   }

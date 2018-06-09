@@ -84,8 +84,8 @@ const styles = {
 };
 
 const mapStateToProps = ({
-  events: { collectiveName, collectiveId, otherUsers, title, description, date } }) =>
-  ({ collectiveName, collectiveId, otherUsers, title, description, date });
+  events: { user, collectiveName, collectiveId, otherUsers, title, description, date } }) =>
+  ({ user, collectiveName, collectiveId, otherUsers, title, description, date });
 
 export default connect(mapStateToProps, {
   setModalVisibilityEvents,

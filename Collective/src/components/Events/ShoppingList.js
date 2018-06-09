@@ -21,8 +21,8 @@ class ShoppingList extends Component {
 }
 
 const mapStateToProps = ({
-  events: { collectiveName, otherUsers } }) =>
-  ({ collectiveName, otherUsers });
+  events: { user, collectiveName, otherUsers } }) =>
+  ({ user, collectiveName, otherUsers });
 
 export default connect(mapStateToProps, {
   setModalVisibilityEvents
