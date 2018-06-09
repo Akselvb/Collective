@@ -1,25 +1,16 @@
 import firebase from 'firebase';
 import {
-  OPEN_MODAL,
-  CLOSE_MODAL,
+  SET_MODAL_VISIBILITY_EVENTS,
   ON_TITLE_CHANGE_TEXT,
   ON_DESCRIPTION_CHANGE_TEXT,
   ON_DATE_CHANGE
 } from './types';
 
 
-export const openModal = () => dispatch => {
+export const setModalVisibilityEvents = (isVisible) => dispatch => {
   dispatch({
-    type: OPEN_MODAL,
-    payload: true
-  });
-};
-
-
-export const closeModal = () => dispatch => {
-  dispatch({
-    type: CLOSE_MODAL,
-    payload: false
+    type: SET_MODAL_VISIBILITY_EVENTS,
+    payload: isVisible
   });
 };
 

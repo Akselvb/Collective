@@ -1,20 +1,14 @@
 import {
   NAME_OF_COLLECTIVE_RETRIEVED,
   OTHER_USERS_IN_COLLECTIVE_RETRIEVED,
-  SET_MODAL_VISIBILITY_EVENTS,
-  ON_TITLE_CHANGE_TEXT,
-  ON_DESCRIPTION_CHANGE_TEXT,
-  ON_DATE_CHANGE
+  SET_MODAL_VISIBILITY_EXPENSES
 } from '../actions/types';
 
 const INITIAL_STATE = {
   collectiveName: null,
   collectiveId: null,
   otherUsers: null,
-  isModalVisible: false,
-  title: null,
-  description: null,
-  date: null
+  isModalVisible: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -24,15 +18,8 @@ export default (state = INITIAL_STATE, action) => {
     case OTHER_USERS_IN_COLLECTIVE_RETRIEVED:
       return { ...state, otherUsers: action.payload.toString() };
 
-    case SET_MODAL_VISIBILITY_EVENTS:
+    case SET_MODAL_VISIBILITY_EXPENSES:
       return { ...state, isModalVisible: action.payload };
-
-    case ON_TITLE_CHANGE_TEXT:
-      return { ...state, title: action.payload };
-    case ON_DESCRIPTION_CHANGE_TEXT:
-      return { ...state, description: action.payload };
-    case ON_DATE_CHANGE:
-      return { ...state, date: action.payload };
 
     default:
       return state;

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-
-import { Button } from '../common';
+import { Button, Card, CardSection } from '../common';
 import {
-  closeModal,
+  setModalVisibilityEvents,
   onTitleChangeText,
   onDescriptionChangeText,
   onDateChange,
@@ -16,11 +15,11 @@ class CreateEvent extends Component {
   onPress() {
     const { collectiveId, title, description, date } = this.props;
     this.props.saveEvent({ collectiveId }, title, description, date);
-    this.setModalVisible(false);
+    this.setModalVisibility(false);
   }
 
-  setModalVisible(visible) {
-    this.props.closeModal(visible);
+  setModalVisibility(isVisible) {
+    this.props.setModalVisibilityEvents(isVisible);
   }
 
   renderButton() {
@@ -28,97 +27,68 @@ class CreateEvent extends Component {
   }
 
   render() {
-    const { containerStyle, textStyle, createNewStyle, textInputStyle } = styles;
+    const { textInputStyle } = styles;
 
     return (
-      <View style={containerStyle}>
+      <Card>
 
-      <View>
-        <Text>Tittel</Text>
-        <TextInput
-          style={textInputStyle}
-          onChangeText={(text) => this.props.onTitleChangeText({ text })}
-        />
-      </View>
+        <CardSection>
+          <Text>Tittel</Text>
+          <TextInput
+            style={textInputStyle}
+            onChangeText={(text) => this.props.onTitleChangeText({ text })}
+          />
+        </CardSection>
 
-      <View>
-        <Text>Beskrivelse</Text>
-        <TextInput
-          style={textInputStyle}
-          onChangeText={(text) => this.props.onDescriptionChangeText({ text })}
-        />
-      </View>
+        <CardSection>
+          <Text>Beskrivelse</Text>
+          <TextInput
+            style={textInputStyle}
+            onChangeText={(text) => this.props.onDescriptionChangeText({ text })}
+          />
+        </CardSection>
 
-      <View>
-        <Text>Dato</Text>
-        <TextInput
-          style={textInputStyle}
-          onChangeText={(text) => this.props.onDateChange({ text })}
-        />
-      </View>
+        <CardSection>
+          <Text>Dato</Text>
+          <TextInput
+            style={textInputStyle}
+            onChangeText={(text) => this.props.onDateChange({ text })}
+          />
+        </CardSection>
 
-      <View style={{ minHeight: 40 }}>
-        {this.renderButton()}
-      </View>
+        <CardSection>
+          {this.renderButton()}
+        </CardSection>
 
-        <TouchableOpacity
-          onPress={() => { this.setModalVisible(false); }}
-          style={createNewStyle}
-        >
-          <Text style={textStyle}>Avbryt</Text>
-        </TouchableOpacity>
-
-      </View>
+        <CardSection>
+          <Button
+            onPress={() => { this.setModalVisibility(false); }}
+          >
+            Avbryt
+          </Button>
+        </CardSection>
+      </Card>
     );
   }
 }
 
 const styles = {
-
-  containerStyle: {
-    flex: 1,
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    backgroundColor: '#fdfdfd'
-  },
-
-  textStyle: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  createNewStyle: {
-    maxHeight: 40,
-    justifyContent: 'center',
-    flex: 1,
-    alignItems: 'center',
-    borderColor: 'lightgray',
-    borderBottomWidth: 0.5,
-  },
-
   textInputStyle: {
     height: 40,
+    width: 100,
+    padding: 5,
     borderColor: 'gray',
     borderWidth: 1,
     margin: 10
   }
-
 };
 
 const mapStateToProps = ({
-  events: { collectiveName, collectiveId, otherUsers, modalVisible, title, description, date } }) =>
-  ({ collectiveName, collectiveId, otherUsers, modalVisible, title, description, date });
+  events: { collectiveName, collectiveId, otherUsers, title, description, date } }) =>
+  ({ collectiveName, collectiveId, otherUsers, title, description, date });
 
 export default connect(mapStateToProps, {
-  closeModal,
+  setModalVisibilityEvents,
   onTitleChangeText,
   onDescriptionChangeText,
   onDateChange,

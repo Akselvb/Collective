@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { Input, RoundButton } from '../common';
+import { Input, RoundButton, Card, CardSection } from '../common';
 import { sendMessage } from '../../actions';
 import Messages from './Messages';
 
@@ -32,49 +32,20 @@ class Chat extends Component {
 
   render() {
     return (
-      <View style={styles.containerStyle}>
+      <Card>
           <Messages />
-
-            <View style={styles.containerStyle1}>
-
+            <CardSection>
               <Field
                 name="chatInput"
                 placeholder="Aa"
                 component={Input}
               />
-
             {this.renderButton()}
-          </View>
-
-      </View>
+          </CardSection>
+      </Card>
     );
   }
 }
-
-const styles = {
-  containerStyle: {
-    flex: 1,
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1
-  },
-  containerStyle1: {
-    backgroundColor: '#fefefe',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1
-  }
-};
 
 const mapStateToProps = ({
   chat: { isFetching, height, user, collectiveId } }) =>
