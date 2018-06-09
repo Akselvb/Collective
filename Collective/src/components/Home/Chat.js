@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { Input, RoundButton, Card, CardSection } from '../common';
+import { Input, RoundButton, CardSection } from '../common';
 import { sendMessage } from '../../actions';
 import Messages from './Messages';
 

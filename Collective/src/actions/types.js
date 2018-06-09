@@ -20,6 +20,7 @@ export const SEND_MESSAGE = 'send_message';
 export const ADD_MESSAGE = 'add_message';
 
 export const SELECT_LIBRARY = 'select_library';
+export const SET_MODAL_VISIBILITY_NOTIFICATIONS = 'set_modal_visibility_notifications';
 
 export const SET_MODAL_VISIBILITY_EVENTS = 'set_modal_visibility_events';
 export const ON_TITLE_CHANGE_TEXT = 'on_title_change_text';
