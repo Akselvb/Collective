@@ -72,7 +72,7 @@ const styles = {
   },
 
   containerStyle: {
-    flex: 10,
+    flex: 1,
     borderWidth: 1,
     borderRadius: 2,
     borderColor: '#ddd',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 
 import { closeModal } from '../../actions';
@@ -11,14 +11,25 @@ class CreateEvent extends Component {
   }
 
   render() {
+    const { containerStyle, textStyle, createNewStyle, textInputStyle } = styles;
+
     return (
-      <View style={{ flex: 1 }}>
+      <View style={containerStyle}>
+
+      <View>
+        <Text>Tittel</Text>
+        <TextInput
+          style={textInputStyle}
+          // onChangeText={(text) => this.setState({ text })}
+          // value={this.state.text}
+        />
+      </View>
 
         <TouchableOpacity
           onPress={() => { this.setModalVisible(false); }}
-          style={styles.createNewStyle}
+          style={createNewStyle}
         >
-          <Text style={styles.textStyle}>Avbryt</Text>
+          <Text style={textStyle}>Avbryt</Text>
         </TouchableOpacity>
 
       </View>
@@ -27,24 +38,19 @@ class CreateEvent extends Component {
 }
 
 const styles = {
-  titleContainerStyle: {
-    paddingTop: 20,
-    fontSize: 16,
-    alignItems: 'center',
-    minHeight: 40,
-    backgroundColor: '#f5f5f5',
+
+  containerStyle: {
+    flex: 1,
     borderWidth: 1,
     borderRadius: 2,
     borderColor: '#ddd',
+    borderBottomWidth: 0,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 1
-  },
-  titleTextStyle: {
-    fontSize: 16,
-    color: '#72BA6F',
-    marginBottom: 10
+    shadowRadius: 2,
+    elevation: 1,
+    backgroundColor: '#fdfdfd'
   },
 
   textStyle: {
@@ -60,6 +66,13 @@ const styles = {
     alignItems: 'center',
     borderColor: 'lightgray',
     borderBottomWidth: 0.5,
+  },
+
+  textInputStyle: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    margin: 10
   }
 
 };
