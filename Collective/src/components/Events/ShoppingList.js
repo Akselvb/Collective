@@ -4,21 +4,22 @@ import { connect } from 'react-redux';
 
 import { closeModal } from '../../actions';
 
-class CreateEvent extends Component {
+class ShoppingList extends Component {
 
   setModalVisible(visible) {
     this.props.closeModal(visible);
   }
 
   render() {
+    const { textStyle, createNewStyle } = styles;
     return (
       <View style={{ flex: 1 }}>
 
         <TouchableOpacity
           onPress={() => { this.setModalVisible(false); }}
-          style={styles.createNewStyle}
+          style={createNewStyle}
         >
-          <Text style={styles.textStyle}>Avbryt</Text>
+          <Text style={textStyle}>Avbryt</Text>
         </TouchableOpacity>
 
       </View>
@@ -27,26 +28,6 @@ class CreateEvent extends Component {
 }
 
 const styles = {
-  titleContainerStyle: {
-    paddingTop: 20,
-    fontSize: 16,
-    alignItems: 'center',
-    minHeight: 40,
-    backgroundColor: '#f5f5f5',
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ddd',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 1
-  },
-  titleTextStyle: {
-    fontSize: 16,
-    color: '#72BA6F',
-    marginBottom: 10
-  },
-
   textStyle: {
     flex: 1,
     justifyContent: 'center',
@@ -70,4 +51,4 @@ const mapStateToProps = ({
 
 export default connect(mapStateToProps, {
   closeModal
-})(CreateEvent);
+})(ShoppingList);

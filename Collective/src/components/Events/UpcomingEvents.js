@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import LibraryList from './LibraryList';
-import CreateEvent from './CreateEvent';
+import RouterEvents from '../../RouterEvents';
 
-import { openModal, closeModal } from '../../actions';
+import { openModal } from '../../actions';
 
 class UpcomingEvents extends Component {
 
   setModalVisible(visible) {
-    console.log(this.props);
     this.props.openModal(visible);
   }
 
@@ -27,7 +26,7 @@ class UpcomingEvents extends Component {
           transparent={false}
           visible={this.props.modalVisible}
         >
-          <CreateEvent />
+          <RouterEvents />
         </Modal>
 
         <TouchableOpacity onPress={() => { this.setModalVisible(true); }} style={createNewStyle}>
@@ -92,5 +91,5 @@ const mapStateToProps = ({
   ({ user, collectiveName, otherUsers, modalVisible });
 
 export default connect(mapStateToProps, {
-  openModal, closeModal
+  openModal
 })(UpcomingEvents);
