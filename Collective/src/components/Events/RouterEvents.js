@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Dimensions, TouchableOpacity, View, Animated, Text } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { connect } from 'react-redux';
-import CreateEvent from './components/Events/CreateEvent';
-import ShoppingList from './components/Events/ShoppingList';
-import WashingList from './components/Events/WashingList';
+import CreateEvent from './CreateEvent';
+import ShoppingList from './ShoppingList';
+import WashingList from './WashingList';
 
 class RouterEvents extends Component {
   state = {

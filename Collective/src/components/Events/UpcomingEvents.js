@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import LibraryList from './LibraryList';
-import RouterEvents from '../../RouterEvents';
+import RouterEvents from './RouterEvents';
 import { Card, CardSection, Button } from '../common';
 import { setModalVisibilityEvents } from '../../actions';
 
