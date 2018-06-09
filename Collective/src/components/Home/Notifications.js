@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { Card } from '../common';
+import { Button, Card, CardSection } from '../common';
 
 class Notifications extends Component {
+
   render() {
     return (
-      <Card>
-          <View style={{ flexDirection: 'row' }}>
-            {this.renderCollectiveName()}
-          </View>
-        <Text> NOTIFICATIONS </Text>
-      </Card>
+        <CardSection>
+          <Button> Notifications </Button>
+        </CardSection>
     );
   }
 }

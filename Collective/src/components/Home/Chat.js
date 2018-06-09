@@ -32,7 +32,7 @@ class Chat extends Component {
 
   render() {
     return (
-      <Card>
+      <View style={styles.containerStyle}>
           <Messages />
             <CardSection>
               <Field
@@ -42,10 +42,26 @@ class Chat extends Component {
               />
             {this.renderButton()}
           </CardSection>
-      </Card>
+      </View>
     );
   }
 }
+
+const styles = {
+  containerStyle: {
+    flex: 11,
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#ddd',
+    borderBottomWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    backgroundColor: '#fdfdfd'
+  }
+};
 
 const mapStateToProps = ({
   chat: { isFetching, height, user, collectiveId } }) =>

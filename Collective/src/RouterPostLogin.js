@@ -102,7 +102,7 @@ const styles = ({
 });
 
 const mapStateToProps = ({
-  manager: { user, collectiveId, collectiveName, otherUsers } }) =>
-  ({ user, collectiveId, collectiveName, otherUsers });
+  manager: { collectiveName } }) =>
+  ({ collectiveName });
 
 export default connect(mapStateToProps)(RouterPostLogin);
