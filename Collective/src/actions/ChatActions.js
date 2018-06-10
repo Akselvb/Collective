@@ -14,7 +14,7 @@ export const fetchMessages = (collectiveId) => dispatch => {
 
   firebase
     .database()
-    .ref(`collectives/${collectiveId}/chat/messages`)
+    .ref(`collectives/${collectiveId}/chat`)
     .on('value', snapshot => {
       // Gets around Redux panicking about actions in reducers
       setTimeout(() => {
@@ -53,6 +53,6 @@ export const sendMessage = ({ collectiveId, user }, message) => dispatch => {
 
   firebase
     .database()
-    .ref(`collectives/${collectiveId}/chat/messages`)
+    .ref(`collectives/${collectiveId}/chat`)
     .push(msg);
 };
