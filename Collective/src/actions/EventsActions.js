@@ -7,6 +7,9 @@ import {
 } from './types';
 
 
+/*
+  Opens and closes the modal in the events tab
+*/
 export const setModalVisibilityEvents = (isVisible) => dispatch => {
   dispatch({
     type: SET_MODAL_VISIBILITY_EVENTS,
@@ -14,6 +17,9 @@ export const setModalVisibilityEvents = (isVisible) => dispatch => {
   });
 };
 
+/*
+  Handles text input of events title
+*/
 export const onTitleChangeText = (text) => dispatch => {
   dispatch({
     type: ON_TITLE_CHANGE_TEXT,
@@ -21,6 +27,9 @@ export const onTitleChangeText = (text) => dispatch => {
   });
 };
 
+/*
+  Handles text input of events description
+*/
 export const onDescriptionChangeText = (text) => dispatch => {
   dispatch({
     type: ON_DESCRIPTION_CHANGE_TEXT,
@@ -28,6 +37,9 @@ export const onDescriptionChangeText = (text) => dispatch => {
   });
 };
 
+/*
+  Handles text input of events date
+*/
 export const onDateChange = (text) => dispatch => {
   dispatch({
     type: ON_DATE_CHANGE,
@@ -35,6 +47,9 @@ export const onDateChange = (text) => dispatch => {
   });
 };
 
+/*
+  Pushes event to firebase
+*/
 export const saveEvent = ({ collectiveId }, title, description, date) => dispatch => {
   const event = {
     title: title.text,
