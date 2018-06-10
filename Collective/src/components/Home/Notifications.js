@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, CardSection, Button } from '../common';
-import { setModalVisibilityExpenses } from '../../actions';
+import { setModalVisibilityNotifications } from '../../actions';
+import { Card, Button, CardSection } from '../common';
 
-class CreateExpense extends Component {
+class Notifications extends Component {
 
   render() {
     const { viewStyle, textStyle } = styles;
+
     return (
       <View style={{ flex: 1 }}>
 
         <View style={viewStyle}>
-          <Text style={textStyle}>Legg til utlegg</Text>
+          <Text style={textStyle}>Notifikasjoner</Text>
         </View>
 
         <Card>
           <CardSection>
             <Button
-              onPress={() => { this.props.setModalVisibilityExpenses(false); }}
+              onPress={() => { this.props.setModalVisibilityNotifications(false); }}
             >
               Avbryt
             </Button>
@@ -45,9 +46,9 @@ const styles = {
 };
 
 const mapStateToProps = ({
-  expenses: { user, collectiveId, otherUsers } }) =>
-  ({ user, collectiveId, otherUsers });
+  manager: { user, collectiveId, collectiveName, otherUsers } }) =>
+  ({ user, collectiveId, collectiveName, otherUsers });
 
 export default connect(mapStateToProps, {
-  setModalVisibilityExpenses
-})(CreateExpense);
+  setModalVisibilityNotifications
+})(Notifications);

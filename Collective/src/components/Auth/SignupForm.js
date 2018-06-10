@@ -59,7 +59,8 @@ class SignupForm extends Component {
 
         <CardSection>{this.renderErrorText()}</CardSection>
 
-        <CardSection style={{ paddingTop: 350 }} />
+        <CardSection />
+
       </Card>
     );
   }

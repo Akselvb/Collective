@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { Input, RoundButton } from '../common';
+import { Input, RoundButton, CardSection } from '../common';
 import { sendMessage } from '../../actions';
 import Messages from './Messages';
 
@@ -34,18 +34,14 @@ class Chat extends Component {
     return (
       <View style={styles.containerStyle}>
           <Messages />
-
-            <View style={styles.containerStyle1}>
-
+            <CardSection>
               <Field
                 name="chatInput"
                 placeholder="Aa"
                 component={Input}
               />
-
             {this.renderButton()}
-          </View>
-
+          </CardSection>
       </View>
     );
   }
@@ -53,7 +49,7 @@ class Chat extends Component {
 
 const styles = {
   containerStyle: {
-    flex: 1,
+    flex: 11,
     borderWidth: 1,
     borderRadius: 2,
     borderColor: '#ddd',
@@ -62,17 +58,8 @@ const styles = {
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
-    elevation: 1
-  },
-  containerStyle1: {
-    backgroundColor: '#fefefe',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1
+    elevation: 1,
+    backgroundColor: '#fdfdfd'
   }
 };
 

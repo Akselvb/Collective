@@ -7,6 +7,7 @@ import ChatReducer from './ChatReducer';
 import LibraryReducer from './LibraryReducer';
 import EventSelectionReducer from './EventSelectionReducer';
 import EventsReducer from './EventsReducer';
+import ExpensesReducer from './ExpensesReducer';
 
 
 export default combineReducers({
@@ -17,5 +18,6 @@ export default combineReducers({
   chat: ChatReducer,
   libraries: LibraryReducer,
   selectedLibraryId: EventSelectionReducer,
-  events: EventsReducer
+  events: EventsReducer,
+  expenses: ExpensesReducer
 });
