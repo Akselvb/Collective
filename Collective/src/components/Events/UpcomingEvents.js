@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Text, Modal, ListView } from 'react-native';
+import { Text, Modal, ListView, ScrollView, View } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import LibraryList from './LibraryList';
 import RouterEvents from './RouterEvents';
 import { Card, CardSection, Button } from '../common';
+import Panel from './common/Panel';
 import EventsListItem from './EventsListItem';
 import {
   setModalVisibilityEvents,
@@ -21,7 +21,6 @@ class UpcomingEvents extends Component {
     We only want to call eventsFetch once.
   */
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(prevState);
     if (nextProps.collectiveId && !isCalled) {
       isCalled = true;
       nextProps.eventsFetch(nextProps.collectiveId);
@@ -60,6 +59,8 @@ class UpcomingEvents extends Component {
   }
 
   render() {
+    const { containerStyle } = styles;
+
     return (
       <Card>
         <CardSection>
@@ -79,8 +80,18 @@ class UpcomingEvents extends Component {
         </CardSection>
 
         <CardSection>
-          <Text>{this.props.user.email}</Text>
-          <Text>{this.props.otherUsers}</Text>
+          <View style={containerStyle}>
+            <Text>{this.props.user.email}</Text>
+            <Text>{this.props.otherUsers}</Text>
+          </View>
+        </CardSection>
+
+        <CardSection>
+          <ScrollView styles={containerStyle}>
+            <Panel title="Handleliste">
+              <Text>Tacokrydder</Text>
+            </Panel>
+          </ScrollView>
         </CardSection>
 
         {this.renderEventsList()}
@@ -89,6 +100,16 @@ class UpcomingEvents extends Component {
     );
   }
 }
+
+const styles = {
+  containerStyle: {
+    flex: 1,
+    backgroundColor: '#f4f7f9',
+    paddingTop: 30,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da'
+  }
+};
 
 const mapStateToProps = ({
   events: { user, collectiveName, collectiveId, otherUsers, isModalVisible, events } }) =>
