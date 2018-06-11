@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import RouterEvents from './RouterEvents';
 import { Card, CardSection, Button } from '../common';
-import Panel from './common/Panel';
+import Panel from '../common/Panel';
 import EventsListItem from './EventsListItem';
 import {
   setModalVisibilityEvents,
@@ -41,11 +41,13 @@ class UpcomingEvents extends Component {
 
       return (
         <CardSection>
-          <ListView
-            enableEmptySections
-            dataSource={this.dataSource}
-            renderRow={this.renderRow}
-          />
+          <View style={styles.containerStyle}>
+            <ListView
+              enableEmptySections
+              dataSource={this.dataSource}
+              renderRow={this.renderRow}
+            />
+          </View>
         </CardSection>
       );
     }
@@ -87,11 +89,13 @@ class UpcomingEvents extends Component {
         </CardSection>
 
         <CardSection>
-          <ScrollView styles={containerStyle}>
+          <View style={containerStyle}>
+          <ScrollView>
             <Panel title="Handleliste">
               <Text>Tacokrydder</Text>
             </Panel>
           </ScrollView>
+          </View>
         </CardSection>
 
         {this.renderEventsList()}
@@ -104,10 +108,9 @@ class UpcomingEvents extends Component {
 const styles = {
   containerStyle: {
     flex: 1,
-    backgroundColor: '#f4f7f9',
-    paddingTop: 30,
+    padding: 10,
     borderWidth: 0.5,
-    borderColor: '#d6d7da'
+    borderColor: '#121212'
   }
 };
 
