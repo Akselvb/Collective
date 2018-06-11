@@ -6,24 +6,21 @@ import {
   setModalVisibilityEvents,
   onTitleChangeText,
   onDescriptionChangeText,
-  onDateChange,
+  onStartDateChange,
+  onEndDateChange,
   saveEvent
  } from '../../actions';
 
 class CreateEvent extends Component {
 
   onPress() {
-    const { collectiveId, title, description, date } = this.props;
-    this.props.saveEvent({ collectiveId }, title, description, date);
+    const { collectiveId, title, description, startDate, endDate } = this.props;
+    this.props.saveEvent({ collectiveId }, title, description, startDate, endDate);
     this.setModalVisibility(false);
   }
 
   setModalVisibility(isVisible) {
     this.props.setModalVisibilityEvents(isVisible);
-  }
-
-  renderButton() {
-    return <Button onPress={this.onPress.bind(this)}>Legg til</Button>;
   }
 
   render() {
@@ -49,15 +46,27 @@ class CreateEvent extends Component {
         </CardSection>
 
         <CardSection>
-          <Text>Dato</Text>
+          <Text>Dato start</Text>
           <TextInput
             style={textInputStyle}
-            onChangeText={(text) => this.props.onDateChange({ text })}
+            onChangeText={(text) => this.props.onStartDateChange({ text })}
           />
         </CardSection>
 
         <CardSection>
-          {this.renderButton()}
+          <Text>Dato slutt</Text>
+          <TextInput
+            style={textInputStyle}
+            onChangeText={(text) => this.props.onEndDateChange({ text })}
+          />
+        </CardSection>
+
+        <CardSection>
+          <Text>Knapper der man kan legge til de andre i kollektivet også</Text>
+        </CardSection>
+
+        <CardSection>
+          <Button onPress={this.onPress.bind(this)}>Legg til</Button>
         </CardSection>
 
         <CardSection>
@@ -84,13 +93,14 @@ const styles = {
 };
 
 const mapStateToProps = ({
-  events: { user, collectiveName, collectiveId, otherUsers, title, description, date } }) =>
-  ({ user, collectiveName, collectiveId, otherUsers, title, description, date });
+  events: { user, collectiveName, collectiveId, otherUsers, title, description, startDate, endDate } }) =>
+  ({ user, collectiveName, collectiveId, otherUsers, title, description, startDate, endDate });
 
 export default connect(mapStateToProps, {
   setModalVisibilityEvents,
   onTitleChangeText,
   onDescriptionChangeText,
-  onDateChange,
+  onStartDateChange,
+  onEndDateChange,
   saveEvent
 })(CreateEvent);

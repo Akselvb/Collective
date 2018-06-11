@@ -25,6 +25,8 @@ export const SET_MODAL_VISIBILITY_NOTIFICATIONS = 'set_modal_visibility_notifica
 export const SET_MODAL_VISIBILITY_EVENTS = 'set_modal_visibility_events';
 export const ON_TITLE_CHANGE_TEXT = 'on_title_change_text';
 export const ON_DESCRIPTION_CHANGE_TEXT = 'on_description_change_text';
-export const ON_DATE_CHANGE = 'on_date_change';
+export const ON_START_DATE_CHANGE = 'on_start_date_change';
+export const ON_END_DATE_CHANGE = 'on_end_date_change';
 
 export const SET_MODAL_VISIBILITY_EXPENSES = 'set_modal_visibility_expenses';
+export const EVENTS_FETCH_SUCCESS = 'events_fetch_success';

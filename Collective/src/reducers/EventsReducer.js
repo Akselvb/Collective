@@ -5,7 +5,9 @@ import {
   SET_MODAL_VISIBILITY_EVENTS,
   ON_TITLE_CHANGE_TEXT,
   ON_DESCRIPTION_CHANGE_TEXT,
-  ON_DATE_CHANGE
+  ON_START_DATE_CHANGE,
+  ON_END_DATE_CHANGE,
+  EVENTS_FETCH_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -16,7 +18,9 @@ const INITIAL_STATE = {
   isModalVisible: false,
   title: null,
   description: null,
-  date: null
+  startDate: null,
+  endDate: null,
+  events: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -26,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
     case NAME_OF_COLLECTIVE_RETRIEVED:
       return { ...state, collectiveName: action.payload[0], collectiveId: action.payload[1] };
     case OTHER_USERS_IN_COLLECTIVE_RETRIEVED:
-      return { ...state, otherUsers: action.payload.toString() };
+      return { ...state, otherUsers: action.payload };
 
     case SET_MODAL_VISIBILITY_EVENTS:
       return { ...state, isModalVisible: action.payload };
@@ -35,8 +39,13 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, title: action.payload };
     case ON_DESCRIPTION_CHANGE_TEXT:
       return { ...state, description: action.payload };
-    case ON_DATE_CHANGE:
-      return { ...state, date: action.payload };
+    case ON_START_DATE_CHANGE:
+      return { ...state, startDate: action.payload };
+    case ON_END_DATE_CHANGE:
+      return { ...state, endDate: action.payload };
+
+    case EVENTS_FETCH_SUCCESS:
+      return { ...state, events: action.payload };
 
     default:
       return state;
