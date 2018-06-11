@@ -3,7 +3,9 @@ import {
   SET_MODAL_VISIBILITY_EVENTS,
   ON_TITLE_CHANGE_TEXT,
   ON_DESCRIPTION_CHANGE_TEXT,
-  ON_DATE_CHANGE
+  ON_START_DATE_CHANGE,
+  ON_END_DATE_CHANGE,
+  EVENTS_FETCH_SUCCESS
 } from './types';
 
 
@@ -38,11 +40,21 @@ export const onDescriptionChangeText = (text) => dispatch => {
 };
 
 /*
-  Handles text input of events date
+  Handles text input of events start date
 */
-export const onDateChange = (text) => dispatch => {
+export const onStartDateChange = (text) => dispatch => {
   dispatch({
-    type: ON_DATE_CHANGE,
+    type: ON_START_DATE_CHANGE,
+    payload: text
+  });
+};
+
+/*
+  Handles text input of events end date
+*/
+export const onEndDateChange = (text) => dispatch => {
+  dispatch({
+    type: ON_END_DATE_CHANGE,
     payload: text
   });
 };
@@ -50,15 +62,33 @@ export const onDateChange = (text) => dispatch => {
 /*
   Pushes event to firebase
 */
-export const saveEvent = ({ collectiveId }, title, description, date) => dispatch => {
+export const saveEvent = ({ collectiveId }, title, description, startDate, endDate) => dispatch => {
   const event = {
     title: title.text,
     description: description.text,
-    date: date.text
+    startDate: startDate.text,
+    endDate: endDate.text
   };
 
   firebase
     .database()
     .ref(`collectives/${collectiveId}/events/`)
     .push(event);
+};
+
+/*
+  Read data from firebase
+*/
+export const eventsFetch = (collectiveId) => {
+  return (dispatch) => {
+    firebase
+      .database()
+      .ref(`collectives/${collectiveId}/events`)
+      .on('value', snapshot => {
+        dispatch({
+          type: EVENTS_FETCH_SUCCESS,
+          payload: snapshot.val()
+        });
+      });
+  };
 };
